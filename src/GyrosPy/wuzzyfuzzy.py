@@ -3,7 +3,7 @@ import numpy as np
 
 
 def funcion_membresia_fria(x, rango):
-    # Función de membresía triangular para "fría"
+   
     if x <= rango[0] or x >= rango[1]:
         return 0
     elif x < (rango[0] + rango[1]) / 2:
@@ -38,8 +38,7 @@ def inferencia_difusa(temp):
     rango_fria = [0, 15]
     rango_templada = [10, 20, 30]
     rango_caliente = [25, 40]
-
-    # Calcular el grado de membresía para cada etiqueta de temperatura
+ 
     grados_fria = funcion_membresia_fria(temp, rango_fria)
     grados_templada = funcion_membresia_templada(temp, rango_templada)
     grados_caliente = funcion_membresia_caliente(temp, rango_caliente)
