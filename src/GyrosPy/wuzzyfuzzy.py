@@ -1,7 +1,7 @@
 import numpy as np
 
 
-# Definición de las funciones de membresía de temperatura y clasificación
+
 def funcion_membresia_fria(x, rango):
     # Función de membresía triangular para "fría"
     if x <= rango[0] or x >= rango[1]:
@@ -13,7 +13,7 @@ def funcion_membresia_fria(x, rango):
 
 
 def funcion_membresia_templada(x, rango):
-    # Función de membresía triangular para "templada"
+    
     if x <= rango[0] or x >= rango[2]:
         return 0
     elif x < (rango[0] + rango[1]) / 2:
@@ -23,7 +23,7 @@ def funcion_membresia_templada(x, rango):
 
 
 def funcion_membresia_caliente(x, rango):
-    # Función de membresía triangular para "caliente"
+    
     if x <= rango[0] or x >= rango[2]:
         return 0
     elif x < (rango[0] + rango[1]) / 2:
@@ -32,9 +32,9 @@ def funcion_membresia_caliente(x, rango):
         return (rango[2] - x) / (rango[2] - rango[1])
 
 
-# Función de inferencia difusa
+
 def inferencia_difusa(temp):
-    # Definir los rangos de las funciones de membresía
+    
     rango_fria = [0, 15]
     rango_templada = [10, 20, 30]
     rango_caliente = [25, 40]
