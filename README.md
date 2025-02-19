@@ -52,5 +52,5 @@ Aunque soy el único contribuidor actual, siempre estoy abierto a ideas y sugere
 
 ---
 
-**"La fantasía de hoy es la realidad de mañana."**  
+**"La fantasía de hoy es la realidad de mañana, si eso muere todo se tornara negro una vez mas."**  
 – MetaCodeX
