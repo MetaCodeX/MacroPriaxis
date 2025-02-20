@@ -2,7 +2,7 @@ import numpy as np
 import skfuzzy as fuzz
 import skfuzzy.control as ctrl
 import matplotlib.pyplot as plt
-
+#Creado Con IA para clasificar la temperatura en fria, templada y caliente incluyendo Importaciones 
 # Definir la variable de entrada (temperatura) y la de salida (clasificación)
 temperatura = ctrl.Antecedent(np.arange(0, 41, 1), 'temperatura')
 clasificacion = ctrl.Consequent(np.arange(0, 101, 1), 'clasificacion')

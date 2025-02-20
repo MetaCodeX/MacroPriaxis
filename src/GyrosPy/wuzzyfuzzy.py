@@ -1,5 +1,5 @@
 import numpy as np
-
+##creado con IA para clasificar la temperatura en fria, templada y caliente Sin impórtaciones 
 def funcion_membresia_fria(x, rango):
    
     if x <= rango[0] or x >= rango[1]:
