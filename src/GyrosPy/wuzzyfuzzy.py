@@ -1,7 +1,5 @@
 import numpy as np
 
-
-
 def funcion_membresia_fria(x, rango):
    
     if x <= rango[0] or x >= rango[1]:
@@ -43,22 +41,14 @@ def inferencia_difusa(temp):
     grados_templada = funcion_membresia_templada(temp, rango_templada)
     grados_caliente = funcion_membresia_caliente(temp, rango_caliente)
 
-    # Establecer las reglas para inferir la clasificación
-    # Regla 1: Si la temperatura es fría, la clasificación es fría
-    # Regla 2: Si la temperatura es templada, la clasificación es templada
-    # Regla 3: Si la temperatura es caliente, la clasificación es caliente
     resultado = (grados_fria * 0) + (grados_templada * 50) + (grados_caliente * 100)
 
-    # Normalizamos el resultado
     resultado_final = resultado / (grados_fria + grados_templada + grados_caliente)
     return resultado_final
 
-
-# Entrada de temperatura
 temp_input = 18
 
-# Calcular el resultado de la clasificación
 resultado = inferencia_difusa(temp_input)
 
-# Mostrar el resultado
+
 print(f"Para una temperatura de {temp_input}°C, la clasificación es {resultado:.2f}/100")
