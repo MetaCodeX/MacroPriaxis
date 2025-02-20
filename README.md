@@ -4,7 +4,7 @@
 
 **"Múltiples Proyectos para cumplir Mi Última Fantasía"**
 
-Bienvenido al repositorio de **MacroPriaxis**, un espacio donde resguardo mis proyectos y programas realizados durante mi trayectoria en la facultad de tecnologías computacionales. Este repositorio es el reflejo de mi caos sin precedentes, y el sentimiento de llevar un contador sobre la cabeza, en algún segundo todo fallara y nada podrá salvar esto.
+**Bienvenido al repositorio de **MacroPriaxis**, un espacio donde resguardo mis proyectos y programas realizados durante mi trayectoria en la facultad de tecnologías computacionales. Este repositorio es el reflejo de mi caos sin precedentes, y el sentimiento de llevar un contador sobre la cabeza, en algún segundo todo fallara y nada podrá salvar esto.**
 ---
 
 ## 📂 **Proyectos Destacados**
