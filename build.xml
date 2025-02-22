@@ -10,8 +10,11 @@
 <project name="MacroPriaxis" default="default" basedir=".">
     <description>Builds, tests, and runs the project MacroPriaxis.</description>
     <import file="nbproject/build-impl.xml"/>
-    <!--
 
+    <!-- Eliminar archivos .class no deseados después de crear el JAR -->
+
+
+    <!--
     There exist several targets which are by default empty and which can be 
     used for execution of your tasks. These targets are usually executed 
     before and after some main targets. They are: 
@@ -43,7 +46,6 @@
     For list of available properties check the imported 
     nbproject/build-impl.xml file. 
 
-
     Another way to customize the build is by overriding existing main targets.
     The targets of interest are: 
 
@@ -68,6 +70,5 @@
     the compile target as the regular run target does. Again, for a list of available 
     properties which you can use, check the target you are overriding in the
     nbproject/build-impl.xml file. 
-
     -->
 </project>

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package macropriaxis.gui;
 
 /**
@@ -21,7 +18,8 @@ public class UVFrame extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         // Cargar las imágenes usando ImageLoader
-        macropriaxis.util.ImageLoader.setImageToLabel(JLabel1, "/macropriaxis/media/UVpnglogo.png");
+String imagePath = "src/macropriaxis/media/UVpnglogo.png"; // Ruta relativa al proyecto
+macropriaxis.util.ImageLoader.setImageToLabel(JLabel1, imagePath);
   
         // Agregar ActionListener al botón ENTRAR
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -61,8 +59,6 @@ public class UVFrame extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel1.setText("UNIVERSIDAD VERACRUZANA");
-
-        JLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/macropriaxis/media/UVpnglogo.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Alumno: Carlos Eduardo Juarez Ricardo");
