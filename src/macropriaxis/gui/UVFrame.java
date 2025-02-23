@@ -18,8 +18,8 @@ public class UVFrame extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         // Cargar las imágenes usando ImageLoader
-String imagePath = "src/macropriaxis/media/UVpnglogo.png"; // Ruta relativa al proyecto
-macropriaxis.util.ImageLoader.setImageToLabel(JLabel1, imagePath);
+    String imagePath = "/macropriaxis/media/UVpnglogo.png"; // Ruta relativa al proyecto
+    macropriaxis.util.ImageLoader.setImageToLabel(JLabel1, imagePath);
   
         // Agregar ActionListener al botón ENTRAR
         jButton1.addActionListener(new java.awt.event.ActionListener() {

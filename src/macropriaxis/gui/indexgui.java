@@ -9,14 +9,17 @@ public class indexgui extends javax.swing.JFrame {
 public indexgui() {
     initComponents();
     
-    // Centrar la ventana en la pantalla
-    this.setLocationRelativeTo(null);
+       this.setLocationRelativeTo(null);
     
-    ImageLoader.setImageToLabel(jLabel4, "/macropriaxis/media/UVpnglogo.png");
-    ImageLoader.setImageToLabel(jLabel3, "/macropriaxis/media/teto.png");
-    // Configurar el botón de retorno
+    
+     String uvPath = "/macropriaxis/media/UVpnglogo.png"; 
+    macropriaxis.util.ImageLoader.setImageToLabel(jLabel3, uvPath);
+     String tetoPath = "/macropriaxis/media/teto.png"; 
+    macropriaxis.util.ImageLoader.setImageToLabel(jLabel4, tetoPath);
+   
     btnVolver.setText("Volver");
     btnVolver.addActionListener(new java.awt.event.ActionListener() {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             btnVolverActionPerformed(evt);
         }

@@ -1,9 +1,11 @@
 package macropriaxis;
+
 /**
  *
  * @author MetaCodeX
  */
-import macropriaxis.gui.indexgui; 
+import macropriaxis.gui.TriQiArea;
+
 public class main {
 
     public static void main(String[] args) {
@@ -11,8 +13,8 @@ public class main {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new indexgui().setVisible(true); 
+                new TriQiArea().setVisible(true); 
             }
         });
     }
-}
+}   
