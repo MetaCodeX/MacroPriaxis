@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package macropriaxis.day24;
+
 import macropriaxis.IndexGigas;
 /**
  *
@@ -133,7 +134,7 @@ this.dispose(); // Cierra la ventana actual
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        calc24 calc = new calc24();
+        frame24 calc = new frame24();
         calc.setVisible(true);
         this.dispose(); // Cierra la ventana actual
 
