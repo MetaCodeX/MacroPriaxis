@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package macropriaxis.day24;
-
+import macropriaxis.IndexGigas;
 /**
  *
  * @author Carlo
@@ -123,7 +123,9 @@ public class index24 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+      IndexGigas indexGigas = new IndexGigas();
+indexGigas.setVisible(true);
+this.dispose(); // Cierra la ventana actual
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
