@@ -14,7 +14,7 @@ Bienvenido al repositorio de **MacroPriaxis**, un espacio donde resguardo mis pr
 Aquí encontrarás una colección de proyectos que he desarrollado, incluyendo:
 
 - **Bases del Proyecto del Giroscopio en Python**: Un proyecto inicial que sentó las bases para mis futuras exploraciones en el mundo de la programación y la física aplicada.
-- **Cancelado** - **Optimización de Hexacure**: ~~Una versión mejorada y optimizada de un proyecto anterior, diseñada para ser más eficiente y escalable. (Próximamente)~~ 
+- **Optimización de Hexacure**: Una versión mejorada y optimizada de un proyecto anterior, diseñada para ser más eficiente y escalable. [HexaCure](https://github.com/MetaCodeX/HexaCure)
 - **Otros proyectos académicos y personales**: Desde algoritmos hasta aplicaciones prácticas, cada proyecto representa un paso más hacia mi última fantasía.
 - **Proyect - [Hermessium](https://github.com/MetaCodeX/Hermessium)**
 
