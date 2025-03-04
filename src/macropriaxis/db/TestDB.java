@@ -24,9 +24,9 @@ public class TestDB extends javax.swing.JFrame {
         new Thread(() -> { // Hilo separado para no bloquear la UI
             try {
                 DatabaseConnection.testConnection();
-                updateStatusLabel("✅ Conectado", new java.awt.Color(0, 153, 51));
+                updateStatusLabel("Conectado", new java.awt.Color(0, 153, 51));
             } catch (SQLException e) {
-                updateStatusLabel("❌ Error: " + e.getMessage(), new java.awt.Color(204, 0, 51));
+                updateStatusLabel("Error: " + e.getMessage(), new java.awt.Color(204, 0, 51));
             }
         }).start();
     }
@@ -54,6 +54,7 @@ public class TestDB extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("DataBase Testing");
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -64,7 +65,7 @@ public class TestDB extends javax.swing.JFrame {
         jLabel2.setText("Estado:");
 
         jLabel3.setFont(new java.awt.Font("Consolas", 0, 36)); // NOI18N
-        jLabel3.setText("unknown");
+        jLabel3.setText("Esperando Conexion");
 
         jButton1.setText("Regresar al Menu");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -78,19 +79,18 @@ public class TestDB extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(238, 238, 238)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 56, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(196, 196, 196)
-                        .addComponent(jButton1)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(jLabel1))
+                .addGap(43, 43, 43))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,9 +121,9 @@ public class TestDB extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-           IndexGigas indexGigas = new IndexGigas();
-indexGigas.setVisible(true);
-this.dispose(); 
+        IndexGigas indexGigas = new IndexGigas();
+        indexGigas.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
