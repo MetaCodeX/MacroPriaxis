@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package macropriaxis.day0303;
-
+import macropriaxis.db.*;
 /**
  *
  * @author Carlo
@@ -15,11 +15,26 @@ public class C0303 extends javax.swing.JFrame {
      */
     public C0303() {
         initComponents();
-         jPanel1.setOpaque(false);
+        jPanel1.setOpaque(false);
         macropriaxis.util.ImageLoader.setFrameBackgroundImage(this, "/macropriaxis/media/MSN1.jpg");
-       String create = "/macropriaxis/media/create.png"; 
-    macropriaxis.util.ImageLoader.setImageToLabel(jLabel1, create);
+        String create = "/macropriaxis/media/create.png"; 
+        macropriaxis.util.ImageLoader.setImageToLabel(jLabel1, create);
         this.setLocationRelativeTo(null);
+        
+        // Limpiar los textfields
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");  // Campo de fecha
+        jTextField3.setToolTipText("Formato: YYYY-MM-DD (ejemplo: 2002-10-18)");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTextField6.setText("");
+        jTextField7.setText("");
+        jTextField8.setText("");
+        jTextField9.setText("");
+        
+        // Configurar el botón de guardar
+        jButton3.setText("Guardar");
     }
 
     /**
@@ -253,9 +268,84 @@ public class C0303 extends javax.swing.JFrame {
             this.dispose(); // Cierra la ventana actual
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private boolean validarFormatoFecha(String fecha) {
+        // Validar que la fecha tenga el formato YYYY-MM-DD
+        return fecha.matches("\\d{4}-\\d{2}-\\d{2}");
+    }
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
+        // Validar campos requeridos
+        if (jTextField1.getText().trim().isEmpty() || 
+            jTextField2.getText().trim().isEmpty() || 
+            jTextField3.getText().trim().isEmpty() || 
+            jTextField8.getText().trim().isEmpty() || 
+            jTextField9.getText().trim().isEmpty()) {
+            
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "Los campos Nombre, Apellidos, Fecha de Nacimiento, Matrícula y Carrera son obligatorios.",
+                "Error de Validación",
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Validar formato de fecha
+        String fecha = jTextField3.getText().trim();
+        if (!validarFormatoFecha(fecha)) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "El formato de fecha debe ser YYYY-MM-DD (ejemplo: 2002-10-18)",
+                "Error de Formato",
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            // Crear objeto Usuario con los datos del formulario
+            Usuario usuario = new Usuario(
+                jTextField1.getText().trim(),  // nombre
+                jTextField2.getText().trim(),  // apellidos
+                jTextField3.getText().trim(),  // fecha_nacimiento
+                jTextField4.getText().trim(),  // ciudad
+                jTextField5.getText().trim(),  // telefono
+                jTextField6.getText().trim(),  // direccion
+                jTextField7.getText().trim(),  // email
+                jTextField8.getText().trim(),  // matricula
+                jTextField9.getText().trim()   // carrera
+            );
+
+            // Crear instancia de UsuarioDAO y guardar el usuario
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            boolean guardadoExitoso = usuarioDAO.insertarUsuario(usuario);
+
+            if (guardadoExitoso) {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                    "Usuario guardado exitosamente",
+                    "Éxito",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                
+                // Limpiar los campos después de guardar
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jTextField3.setText("");
+                jTextField4.setText("");
+                jTextField5.setText("");
+                jTextField6.setText("");
+                jTextField7.setText("");
+                jTextField8.setText("");
+                jTextField9.setText("");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                    "Error al guardar el usuario",
+                    "Error",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "Error: " + e.getMessage(),
+                "Error",
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     /**
      * @param args the command line arguments
