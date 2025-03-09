@@ -141,101 +141,104 @@ public class ImageLoader {
     }
 
     /**
+     * Panel optimizado para manejar imágenes de fondo con mejor rendimiento
+     */
+    private static class OptimizedBackgroundPanel extends JPanel {
+        private BufferedImage backgroundImage;
+        private BufferedImage scaledImage;
+        private int lastWidth;
+        private int lastHeight;
+
+        public OptimizedBackgroundPanel(String imagePath) {
+            setOpaque(false);
+            loadImage(imagePath);
+        }
+
+        private void loadImage(String imagePath) {
+            try {
+                URL imageUrl = ImageLoader.class.getResource(imagePath);
+                if (imageUrl != null) {
+                    backgroundImage = ImageIO.read(imageUrl);
+                }
+            } catch (IOException e) {
+                System.err.println("Error cargando imagen de fondo: " + e.getMessage());
+            }
+        }
+
+        private void updateScaledImage() {
+            int currentWidth = getWidth();
+            int currentHeight = getHeight();
+
+            if (scaledImage == null || currentWidth != lastWidth || currentHeight != lastHeight) {
+                if (backgroundImage != null && currentWidth > 0 && currentHeight > 0) {
+                    scaledImage = new BufferedImage(currentWidth, currentHeight, BufferedImage.TYPE_INT_RGB);
+                    Graphics2D g2d = scaledImage.createGraphics();
+                    g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+                    g2d.drawImage(backgroundImage, 0, 0, currentWidth, currentHeight, null);
+                    g2d.dispose();
+                    
+                    lastWidth = currentWidth;
+                    lastHeight = currentHeight;
+                }
+            }
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            updateScaledImage();
+            if (scaledImage != null) {
+                g.drawImage(scaledImage, 0, 0, null);
+            }
+        }
+    }
+
+    /**
      * Configura un JFrame con una imagen de fondo manteniendo los componentes visibles.
-     * Este método es especialmente útil para crear interfaces con fondos personalizados.
+     * Versión optimizada para mejor rendimiento.
      * 
      * @param frame El JFrame a configurar
      * @param imagePath La ruta de la imagen
      */
     public static void setFrameBackgroundImage(JFrame frame, String imagePath) {
-        // Registra el inicio de la configuración
-        System.out.println("Configurando imagen de fondo para JFrame: " + imagePath);
+        System.out.println("Configurando imagen de fondo optimizada para JFrame: " + imagePath);
         
-        // Obtiene el panel de contenido actual del frame
         Container contentPane = frame.getContentPane();
         
-        // Crea un nuevo panel con la imagen de fondo personalizada
-        JPanel backgroundPanel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                // Sobrescribe el método de pintado para dibujar la imagen de fondo
-                super.paintComponent(g);
-                try {
-                    // Intenta cargar y dibujar la imagen
-                    URL imageUrl = ImageLoader.class.getResource(imagePath);
-                    if (imageUrl != null) {
-                        Image img = ImageIO.read(imageUrl);
-                        if (img != null) {
-                            // Escala y dibuja la imagen al tamaño del panel
-                            g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
-                        }
-                    }
-                } catch (IOException e) {
-                    // Registra cualquier error durante la carga de la imagen
-                    System.err.println("Error cargando imagen de fondo: " + e.getMessage());
-                }
-            }
-        };
-        
-        // Maneja la preservación de componentes y sus constraints
-        if (contentPane != null) {
-            // Obtiene el layout actual
-            LayoutManager originalLayout = contentPane.getLayout();
+        // Verifica si el contentPane usa GroupLayout
+        if (contentPane.getLayout() instanceof GroupLayout) {
+            // Para GroupLayout, creamos un panel intermedio
+            OptimizedBackgroundPanel backgroundPanel = new OptimizedBackgroundPanel(imagePath);
+            backgroundPanel.setLayout(new BorderLayout());
             
-            if (originalLayout instanceof GroupLayout) {
-                // Manejo especial para GroupLayout debido a sus restricciones
-                if (contentPane instanceof JPanel) {
-                    // Hace el panel original transparente
-                    JPanel originalPanel = (JPanel) contentPane;
-                    originalPanel.setOpaque(false);
-                    
-                    // Configura el nuevo panel de fondo
-                    backgroundPanel.setLayout(new BorderLayout());
-                    backgroundPanel.setOpaque(false);
-                    
-                    // Mantiene el panel original intacto dentro del nuevo panel
-                    backgroundPanel.add(originalPanel, BorderLayout.CENTER);
-                }
-            } else {
-                // Manejo para otros tipos de layouts
-                if (originalLayout != null) {
-                    // Copia el layout original al nuevo panel
-                    backgroundPanel.setLayout(originalLayout);
-                    
-                    // Manejo específico según el tipo de layout
-                    if (originalLayout instanceof BorderLayout) {
-                        // Preserva las constraints del BorderLayout
-                        for (Component comp : contentPane.getComponents()) {
-                            Object constraints = ((BorderLayout)originalLayout).getConstraints(comp);
-                            backgroundPanel.add(comp, constraints);
-                        }
-                    } else if (originalLayout instanceof GridBagLayout) {
-                        // Preserva las constraints del GridBagLayout
-                        GridBagLayout gridBag = (GridBagLayout)originalLayout;
-                        for (Component comp : contentPane.getComponents()) {
-                            backgroundPanel.add(comp, gridBag.getConstraints(comp));
-                        }
-                    } else {
-                        // Para otros layouts, añade los componentes sin constraints especiales
-                        for (Component comp : contentPane.getComponents()) {
-                            backgroundPanel.add(comp);
-                        }
-                    }
+            // Preservamos el contentPane original con su GroupLayout
+            if (contentPane instanceof JPanel) {
+                JPanel originalPanel = (JPanel) contentPane;
+                originalPanel.setOpaque(false);
+                backgroundPanel.add(originalPanel, BorderLayout.CENTER);
+            }
+            
+            frame.setContentPane(backgroundPanel);
+        } else {
+            // Para otros layouts, mantenemos la lógica original optimizada
+            OptimizedBackgroundPanel backgroundPanel = new OptimizedBackgroundPanel(imagePath);
+            LayoutManager originalLayout = contentPane.getLayout();
+            backgroundPanel.setLayout(originalLayout != null ? originalLayout : new BorderLayout());
+            
+            Component[] components = contentPane.getComponents();
+            for (Component comp : components) {
+                if (originalLayout instanceof BorderLayout) {
+                    backgroundPanel.add(comp, ((BorderLayout)originalLayout).getConstraints(comp));
+                } else if (originalLayout instanceof GridBagLayout) {
+                    backgroundPanel.add(comp, ((GridBagLayout)originalLayout).getConstraints(comp));
                 } else {
-                    // Si no hay layout, usa BorderLayout por defecto
-                    backgroundPanel.setLayout(new BorderLayout());
-                    for (Component comp : contentPane.getComponents()) {
-                        backgroundPanel.add(comp);
-                    }
+                    backgroundPanel.add(comp);
                 }
             }
+            
+            frame.setContentPane(backgroundPanel);
         }
         
-        // Establece el nuevo panel como contenido del frame
-        frame.setContentPane(backgroundPanel);
-        
-        // Actualiza la visualización del frame
         frame.revalidate();
-        frame.repaint();
     }
 }
