@@ -18,6 +18,13 @@ public class SplashScreen extends javax.swing.JFrame {
         setUndecorated(true);
         setBackground(new java.awt.Color(0, 0, 0, 0));
         
+        // Configurar la ventana para que siempre esté por encima
+        setAlwaysOnTop(true);
+        
+        // Evitar que se pueda minimizar o mover
+        setResizable(false);
+        setFocusableWindowState(false);
+        
         initComponents();
         
         // Hacer el panel transparente
