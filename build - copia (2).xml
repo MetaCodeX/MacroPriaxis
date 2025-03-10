@@ -11,26 +11,8 @@
     <description>Builds, tests, and runs the project MacroPriaxis.</description>
     <import file="nbproject/build-impl.xml"/>
 
-    <!-- Propiedad para el controlador JDBC -->
-    <property name="mysql.connector.jar" value="mysql-connector-j-9.2.0.jar"/>
-
-    <!-- Target personalizado para incluir el controlador JDBC en el JAR -->
-    <target name="-post-jar">
-        <!-- Crear la carpeta lib dentro del directorio de distribución -->
-        <mkdir dir="${dist.dir}/lib"/>
-
-        <!-- Copiar el controlador JDBC a la carpeta lib dentro del directorio de distribución -->
-        <copy file="src/macropriaxis/db/${mysql.connector.jar}" todir="${dist.dir}/lib"/>
-
-        <!-- Actualizar el MANIFEST.MF para incluir el controlador JDBC en el classpath -->
-        <jar destfile="${dist.jar}" update="true">
-            <manifest>
-                <attribute name="Class-Path" value="lib/${mysql.connector.jar}"/>
-            </manifest>
-        </jar>
-    </target>
-
     <!-- Eliminar archivos .class no deseados después de crear el JAR -->
+
 
     <!--
     There exist several targets which are by default empty and which can be 
