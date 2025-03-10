@@ -112,19 +112,26 @@ public class Main0903 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // Botón "Salir": Termina la ejecución completa del programa con código de salida 0 (exitoso)
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-          IndexGigas indexGigas = new IndexGigas();
-indexGigas.setVisible(true);
-this.dispose(); // Cierra la ventana actual
+        // Botón "OtrasApps": Crea una nueva instancia de la ventana IndexGigas
+        IndexGigas indexGigas = new IndexGigas();
+        // Hace visible la nueva ventana
+        indexGigas.setVisible(true);
+        // Cierra la ventana actual (Main0903)
+        this.dispose(); 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Botón "Entrar": Crea una nueva instancia de la ventana Agenda0903
         Agenda0903 Agenda0903 = new Agenda0903();
-Agenda0903.setVisible(true);
-this.dispose(); // Cierra la ventana actual
+        // Hace visible la ventana de la agenda
+        Agenda0903.setVisible(true);
+        // Cierra la ventana actual (Main0903)
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

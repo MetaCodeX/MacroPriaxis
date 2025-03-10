@@ -14,7 +14,21 @@ public class Anotacion0903 extends javax.swing.JFrame {
      * Creates new form Anotacion0903
      */
     public Anotacion0903() {
+        // Configurar el Look and Feel antes de inicializar componentes
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception ex) {
+            // Si falla, continuará con el Look and Feel por defecto
+            System.out.println("No se pudo establecer el Look and Feel Nimbus");
+        }
+
         initComponents();
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         jPanel1.setOpaque(false);
         macropriaxis.util.ImageLoader.setFrameBackgroundImage(this, "/macropriaxis/media/WIN7-2.jpg");
         this.setLocationRelativeTo(null);
@@ -45,7 +59,7 @@ public class Anotacion0903 extends javax.swing.JFrame {
     }                                        
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        System.exit(0);
+        this.dispose(); // Modificado para solo cerrar esta ventana en lugar de toda la aplicación
     }
     
     // Método para mostrar los detalles
@@ -81,7 +95,7 @@ public class Anotacion0903 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Consolas", 3, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

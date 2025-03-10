@@ -25,44 +25,72 @@ public class Agenda0903 extends javax.swing.JFrame {
      * Creates new form Agenda0903
      */
     public Agenda0903() {
+        // Configurar el Look and Feel antes de inicializar componentes
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception ex) {
+            // Si falla, continuará con el Look and Feel por defecto
+            System.out.println("No se pudo establecer el Look and Feel Nimbus");
+        }
+
+        // Inicializa los componentes de la interfaz gráfica generados por NetBeans
         initComponents();
+        // Hace el panel principal transparente para mostrar la imagen de fondo
         jPanel1.setOpaque(false);
+        // Establece la imagen de fondo de la ventana
         macropriaxis.util.ImageLoader.setFrameBackgroundImage(this, "/macropriaxis/media/WIN7.png");
+        // Centra la ventana en la pantalla
         this.setLocationRelativeTo(null);
+        // Configura la tabla con sus columnas y propiedades
         configurarTabla();
+        // Carga los datos existentes en la tabla
         actualizarTabla();
         
-        // Agregar ActionListener al botón Añadir
+        // Configura el botón Añadir con un listener lambda para guardar nuevas entradas
         jButton1.addActionListener(evt -> guardarAgenda());
         
-        // Configurar el botón de menú
+        // Configura el botón de menú para regresar a la ventana principal
         jButton2.addActionListener(evt -> {
+            // Crea y muestra la ventana principal
             new Main0903().setVisible(true);
+            // Cierra la ventana actual de agenda
             this.dispose();
         });
         
-        // Agregar MouseListener a la tabla
+        // Añade un listener para detectar doble clic en las filas de la tabla
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                if (evt.getClickCount() == 2) { // Doble clic
+                // Verifica si fue un doble clic
+                if (evt.getClickCount() == 2) {
+                    // Obtiene la fila seleccionada
                     int row = jTable1.getSelectedRow();
                     if (row != -1) {
                         try {
+                            // Obtiene los datos de la fila seleccionada
                             String asunto = jTable1.getValueAt(row, 0).toString();
                             String fecha = jTable1.getValueAt(row, 1).toString();
                             String hora = jTable1.getValueAt(row, 2).toString();
                             
-                            // Obtener las anotaciones de la base de datos
+                            // Obtiene todas las agendas de la base de datos
                             List<Agenda> agendas = AgendaDAO.obtenerTodasLasAgendas();
+                            // Obtiene las anotaciones específicas de la entrada seleccionada
                             String anotaciones = agendas.get(row).getAnotaciones();
                             
-                            // Abrir ventana de anotaciones
+                            // Crea y muestra la ventana de anotaciones con los detalles
                             Anotacion0903 anotacion = new Anotacion0903();
+                            // Pasa los detalles a la ventana de anotaciones
                             anotacion.mostrarDetalles(asunto, fecha, hora, anotaciones);
+                            // Hace visible la ventana de anotaciones
                             anotacion.setVisible(true);
                             
                         } catch (Exception e) {
+                            // Muestra un mensaje de error si hay problemas al cargar los detalles
                             JOptionPane.showMessageDialog(null, "Error al cargar los detalles: " + e.getMessage());
                         }
                     }
@@ -296,79 +324,90 @@ public class Agenda0903 extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void configurarTabla() {
+        // Obtiene el modelo de la tabla
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        // Limpia todas las filas existentes en la tabla
         modelo.setRowCount(0);
     }
     
     private void actualizarTabla() {
         try {
+            // Obtiene todas las entradas de agenda desde la base de datos
             List<Agenda> agendas = AgendaDAO.obtenerTodasLasAgendas();
+            // Obtiene el modelo de la tabla para modificarlo
             DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+            // Limpia todas las filas existentes
             modelo.setRowCount(0);
             
+            // Itera sobre cada entrada de agenda y la añade a la tabla
             for (Agenda agenda : agendas) {
                 modelo.addRow(new Object[]{
-                    agenda.getAsunto(),
-                    new SimpleDateFormat("dd-MM-yyyy").format(agenda.getFecha()),
-                    new SimpleDateFormat("HH:mm").format(agenda.getHora())
+                    agenda.getAsunto(),                    // Primera columna: Asunto
+                    new SimpleDateFormat("dd-MM-yyyy").format(agenda.getFecha()),  // Segunda columna: Fecha
+                    new SimpleDateFormat("HH:mm").format(agenda.getHora())        // Tercera columna: Hora
                 });
             }
         } catch (Exception e) {
+            // Muestra un mensaje de error si hay problemas al cargar los datos
             JOptionPane.showMessageDialog(this, "Error al cargar las agendas: " + e.getMessage());
         }
     }
     
     private void limpiarCampos() {
-        jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
-        jTextArea1.setText("");
+        // Limpia todos los campos de entrada
+        jTextField1.setText(""); // Campo de asunto
+        jTextField2.setText(""); // Campo de fecha
+        jTextField3.setText(""); // Campo de hora
+        jTextArea1.setText("");  // Campo de anotaciones
     }
     
     private void guardarAgenda() {
-        // Validar campos vacíos
+        // Validar que ningún campo esté vacío
         if (jTextField1.getText().trim().isEmpty() || 
             jTextField2.getText().trim().isEmpty() || 
             jTextField3.getText().trim().isEmpty() || 
             jTextArea1.getText().trim().isEmpty()) {
+            // Muestra mensaje de error si algún campo está vacío
             JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios");
             return;
         }
         
         try {
-            // Validar y convertir fecha
+            // Procesa y valida el formato de la fecha (dd/MM/yyyy)
             String fechaStr = jTextField2.getText().trim().replace("-", "/");
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            dateFormat.setLenient(false);
+            dateFormat.setLenient(false); // No permite fechas inválidas
             java.util.Date utilDate = dateFormat.parse(fechaStr);
             Date sqlDate = new Date(utilDate.getTime());
             
-            // Validar y convertir hora (formato 24 horas)
+            // Procesa y valida el formato de la hora (HH:mm)
             String horaStr = jTextField3.getText().trim();
             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-            timeFormat.setLenient(false);
+            timeFormat.setLenient(false); // No permite horas inválidas
             java.util.Date utilTime = timeFormat.parse(horaStr);
             Time sqlTime = new Time(utilTime.getTime());
             
-            // Guardar en la base de datos
+            // Guarda la nueva entrada en la base de datos
             AgendaDAO.insertarAgenda(
-                jTextField1.getText().trim(),
-                sqlDate,
-                sqlTime,
-                jTextArea1.getText().trim()
+                jTextField1.getText().trim(), // Asunto
+                sqlDate,                      // Fecha convertida
+                sqlTime,                      // Hora convertida
+                jTextArea1.getText().trim()   // Anotaciones
             );
             
-            // Actualizar tabla y limpiar campos
-            actualizarTabla();
+            // Limpia los campos después de guardar
             limpiarCampos();
+            // Actualiza la tabla con la nueva entrada
+            actualizarTabla();
+            
+            // Muestra mensaje de éxito
             JOptionPane.showMessageDialog(this, "Agenda guardada exitosamente");
             
         } catch (ParseException e) {
-            JOptionPane.showMessageDialog(this, 
-                "Formato de fecha u hora incorrecto.\n" +
-                "Use el formato dd/MM/yyyy para la fecha (ejemplo: 14/03/2024)\n" +
-                "y HH:mm para la hora en formato 24 horas (ejemplo: 14:30)");
+            // Muestra error si el formato de fecha u hora es incorrecto
+            JOptionPane.showMessageDialog(this, "Error en el formato de fecha u hora: " + e.getMessage());
         } catch (Exception e) {
+            // Muestra error si hay problemas al guardar en la base de datos
             JOptionPane.showMessageDialog(this, "Error al guardar la agenda: " + e.getMessage());
         }
     }
