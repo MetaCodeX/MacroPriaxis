@@ -1,9 +1,12 @@
 package macropriaxis.day0303;
 
 import java.awt.HeadlessException;
-import macropriaxis.db.Usuario;
-import macropriaxis.db.UsuarioDAO;
 import javax.swing.JOptionPane;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,9 +15,8 @@ import java.util.List;
  */
 public class R0303 extends javax.swing.JFrame {
 
-    // Variables para el manejo de usuarios
-    private final UsuarioDAO usuarioDAO;
-    private Usuario usuarioActual;
+    private static final String JSON_FILE = "src/macropriaxis/offline/usuarios.json";
+    private JSONObject usuarioActual;
 
     /**
      * Creates new form C0303
@@ -27,22 +29,18 @@ public class R0303 extends javax.swing.JFrame {
         macropriaxis.util.ImageLoader.setImageToLabel(jLabel1, update);
         this.setLocationRelativeTo(null);
         
-        // Inicializar DAO
-        usuarioDAO = new UsuarioDAO();
-        
-       
-        
-        // Añadir action listeners a los botones
-        jButton3.addActionListener((java.awt.event.ActionEvent evt) -> {
-            jButton3ActionPerformed(evt);
-        });
-        
-        jButton4.addActionListener((java.awt.event.ActionEvent evt) -> {
-            jButton4ActionPerformed(evt);
-        });
-        
         // Configurar textos por defecto
         configurarTextosDefault();
+        
+        // Conectar el botón de búsqueda
+        jButton3.addActionListener((java.awt.event.ActionEvent evt) -> {
+            buscarUsuario();
+        });
+        
+        // Conectar el botón de limpiar
+        jButton4.addActionListener((java.awt.event.ActionEvent evt) -> {
+            configurarTextosDefault();
+        });
     }
 
     /**
@@ -404,8 +402,7 @@ public class R0303 extends javax.swing.JFrame {
    
 
     // Método para mostrar datos del usuario
-    private void mostrarDatosUsuario(Usuario usuario) {
-        // Guardar el usuario actual
+    private void mostrarDatosUsuario(JSONObject usuario) {
         this.usuarioActual = usuario;
         
         // Color negro para texto normal
@@ -413,92 +410,117 @@ public class R0303 extends javax.swing.JFrame {
         
         // Mostrar los datos en los campos y cambiar color
         jTextField3.setForeground(colorTextoNormal);
-        jTextField3.setText(usuarioActual.getNombre());
+        jTextField3.setText((String)usuario.get("nombre"));
         
         jTextField4.setForeground(colorTextoNormal);
-        jTextField4.setText(usuarioActual.getApellidos());
+        jTextField4.setText((String)usuario.get("apellidos"));
         
         jTextField5.setForeground(colorTextoNormal);
-        jTextField5.setText(usuarioActual.getFechaNacimiento());
+        jTextField5.setText((String)usuario.get("fechaNacimiento"));
         
         jTextField6.setForeground(colorTextoNormal);
-        jTextField6.setText(usuarioActual.getCiudad());
+        jTextField6.setText((String)usuario.get("ciudad"));
         
         jTextField7.setForeground(colorTextoNormal);
-        jTextField7.setText(usuarioActual.getTelefono());
+        jTextField7.setText((String)usuario.get("telefono"));
         
         jTextField8.setForeground(colorTextoNormal);
-        jTextField8.setText(usuarioActual.getDireccion());
+        jTextField8.setText((String)usuario.get("direccion"));
         
         jTextField9.setForeground(colorTextoNormal);
-        jTextField9.setText(usuarioActual.getEmail());
+        jTextField9.setText((String)usuario.get("email"));
         
         jTextField10.setForeground(colorTextoNormal);
-        jTextField10.setText(usuarioActual.getCarrera());
+        jTextField10.setText((String)usuario.get("carrera"));
         
         jTextField11.setForeground(colorTextoNormal);
-        jTextField11.setText(usuarioActual.getMatricula());
+        jTextField11.setText((String)usuario.get("matricula"));
     }
 
     // Método para buscar usuario
     private void buscarUsuario() {
-        // Deshabilitar botón de búsqueda
         jButton3.setEnabled(false);
         
         try {
-            String nombre = jTextField1.getText().trim();
+            String nombre = jTextField1.getText().trim().toLowerCase();
             String idStr = jTextField2.getText().trim();
             
-            // Validar que al menos uno de los campos tenga datos
             if (nombre.isEmpty() && idStr.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Ingrese un nombre o ID para buscar");
                 return;
             }
             
-            List<Usuario> usuarios = null;
+            // Leer el archivo JSON
+            JSONParser parser = new JSONParser();
+            List<JSONObject> usuariosEncontrados = new ArrayList<>();
             
-            // Buscar por ID si está disponible
-            if (!idStr.isEmpty()) {
-                try {
-                    int id = Integer.parseInt(idStr);
-                    usuarios = usuarioDAO.buscarPorId(id);
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(this, "ID debe ser un número válido");
-                    return;
+            try (FileReader reader = new FileReader(JSON_FILE)) {
+                JSONObject jsonData = (JSONObject) parser.parse(reader);
+                JSONArray usuarios = (JSONArray) jsonData.get("usuarios");
+                
+                // Si se proporciona ID, buscar por ID exacto
+                if (!idStr.isEmpty()) {
+                    try {
+                        long idBuscado = Long.parseLong(idStr);
+                        for (Object obj : usuarios) {
+                            JSONObject usuario = (JSONObject) obj;
+                            long id = (Long) usuario.get("id");
+                            if (id == idBuscado) {
+                                usuariosEncontrados.add(usuario);
+                                break; // ID es único, no necesitamos seguir buscando
+                            }
+                        }
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "El ID debe ser un número válido");
+                        return;
+                    }
                 }
-            } 
-            // Buscar por nombre si no hay ID
-            else if (!nombre.isEmpty()) {
-                usuarios = usuarioDAO.buscarPorNombre(nombre);
+                // Si se proporciona nombre, buscar coincidencias parciales
+                else if (!nombre.isEmpty()) {
+                    for (Object obj : usuarios) {
+                        JSONObject usuario = (JSONObject) obj;
+                        String nombreUsuario = ((String) usuario.get("nombre")).toLowerCase();
+                        String apellidosUsuario = ((String) usuario.get("apellidos")).toLowerCase();
+                        
+                        // Buscar en nombre y apellidos
+                        if (nombreUsuario.contains(nombre) || apellidosUsuario.contains(nombre)) {
+                            usuariosEncontrados.add(usuario);
+                        }
+                    }
+                }
             }
             
             // Procesar resultados
-            if (usuarios == null || usuarios.isEmpty()) {
+            if (usuariosEncontrados.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No se encontró ningún usuario");
-                usuarioActual = null; // Limpiar usuario actual
-            } else if (usuarios.size() == 1) {
-                // Un solo usuario encontrado
-                mostrarDatosUsuario(usuarios.get(0));
+                configurarTextosDefault();
+            } else if (usuariosEncontrados.size() == 1) {
+                mostrarDatosUsuario(usuariosEncontrados.get(0));
             } else {
-                // Múltiples usuarios encontrados
-                JOptionPane.showMessageDialog(this, """
-                                                    Se encontraron m\u00faltiples usuarios con el mismo nombre.
-                                                    Por favor, ingrese tambi\u00e9n el ID del usuario.""");
-                usuarioActual = null; // Limpiar usuario actual
+                // Si hay múltiples resultados, mostrar un mensaje con los IDs encontrados
+                StringBuilder mensaje = new StringBuilder("Se encontraron múltiples usuarios:\n\n");
+                for (JSONObject usuario : usuariosEncontrados) {
+                    mensaje.append("ID: ").append(usuario.get("id"))
+                           .append(" - ").append(usuario.get("nombre"))
+                           .append(" ").append(usuario.get("apellidos"))
+                           .append("\n");
+                }
+                mensaje.append("\nPor favor, use el ID para una búsqueda exacta.");
+                
+                JOptionPane.showMessageDialog(this, mensaje.toString());
+                configurarTextosDefault();
             }
             
-        } catch (HeadlessException e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al buscar usuario: " + e.getMessage());
-            usuarioActual = null; // Limpiar usuario actual en caso de error
+            configurarTextosDefault();
         } finally {
-            // Rehabilitar botón de búsqueda
             jButton3.setEnabled(true);
         }
     }
 
     // Método para configurar textos por defecto
     private void configurarTextosDefault() {
-        // Limpiar usuario actual
         usuarioActual = null;
         
         // Color gris para texto por defecto
