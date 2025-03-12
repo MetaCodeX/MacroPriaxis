@@ -6,36 +6,21 @@ package macropriaxis.db;
 import java.sql.SQLException; 
 import javax.swing.SwingUtilities;
 import macropriaxis.IndexGigas;
-import javax.swing.JOptionPane;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import java.io.FileReader;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 /**
  *
  * @author juanm
  */
 public class TestDB extends javax.swing.JFrame {
 
-    private static final String USUARIOS_JSON_FILE = "src/macropriaxis/offline/usuarios.json";
-    private static final String AGENDA_JSON_FILE = "src/macropriaxis/offline/agenda.json";
-    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
-
     /**
      * Creates new form TestDB
      */
     public TestDB() {
         initComponents();
-        this.setLocationRelativeTo(null);
-        testDatabaseConnection(); 
+         this.setLocationRelativeTo(null);
+          testDatabaseConnection(); 
     }
-    
-    private void testDatabaseConnection() {
+     private void testDatabaseConnection() {
         new Thread(() -> { // Hilo separado para no bloquear la UI
             try {
                 DatabaseConnection.testConnection();
@@ -67,21 +52,6 @@ public class TestDB extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DataBase Testing");
@@ -92,11 +62,9 @@ public class TestDB extends javax.swing.JFrame {
         jLabel1.setText("Test Conexion Base de Datos");
 
         jLabel2.setFont(new java.awt.Font("Consolas", 0, 36)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("Estado:");
 
         jLabel3.setFont(new java.awt.Font("Consolas", 0, 36)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel3.setText("Esperando Conexion");
 
         jButton1.setText("Regresar al Menu");
@@ -106,229 +74,47 @@ public class TestDB extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 153));
-
-        jButton3.setText("Exportar Usuarios");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel7.setText("Estado: ");
-
-        jButton2.setText("Importar Usuarios");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
-        jLabel4.setText("PROGRAMA USUARIOS");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(jLabel4)))
-                .addContainerGap(52, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7)
-                .addGap(14, 14, 14))
-        );
-
-        jPanel3.setBackground(new java.awt.Color(204, 255, 204));
-
-        jLabel5.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
-        jLabel5.setText("PROGRAMA AGENDA");
-
-        jButton4.setText("Importar Agenda");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        jButton5.setText("Exportar Agenda");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel8.setText("Estado: ");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 42, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel8)
-                .addGap(14, 14, 14))
-        );
-
-        jPanel4.setBackground(new java.awt.Color(255, 153, 153));
-
-        jLabel6.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
-        jLabel6.setText("CLUSTER");
-
-        jButton6.setText("Sincronizar Todo");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        jButton7.setText("Limpiar DB");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel9.setText("Estado: ");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addGap(116, 116, 116)
-                            .addComponent(jLabel6))
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addGap(43, 43, 43)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel9)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(41, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton7)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel9)
-                .addGap(14, 14, 14))
-        );
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(238, 238, 238)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 56, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(195, 195, 195)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(265, 265, 265))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addGap(74, 74, 74))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(61, 61, 61))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3))
+                    .addComponent(jLabel1))
+                .addGap(43, 43, 43))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addGap(56, 56, 56))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -339,324 +125,6 @@ public class TestDB extends javax.swing.JFrame {
         indexGigas.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // Importar usuarios desde JSON
-        jLabel7.setText("Importando usuarios...");
-        jLabel7.setForeground(new java.awt.Color(0, 0, 204));
-        importarUsuariosJSON();
-    }                                        
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // Exportar usuarios a JSON
-        jLabel7.setText("Exportando usuarios...");
-        jLabel7.setForeground(new java.awt.Color(0, 0, 204));
-        exportarUsuariosJSON();
-    }                                        
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // Importar agenda desde JSON
-        jLabel8.setText("Importando agenda...");
-        jLabel8.setForeground(new java.awt.Color(0, 0, 204));
-        importarAgendaJSON();
-    }                                        
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // Exportar agenda a JSON
-        jLabel8.setText("Exportando agenda...");
-        jLabel8.setForeground(new java.awt.Color(0, 0, 204));
-        exportarAgendaJSON();
-    }                                        
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // Sincronizar todo
-        jLabel9.setText("Sincronizando datos...");
-        jLabel9.setForeground(new java.awt.Color(0, 0, 204));
-        
-        executorService.submit(() -> {
-            try {
-                SwingUtilities.invokeLater(() -> setEnabledBotones(false));
-                
-                // Importar usuarios
-                importarUsuariosJSON();
-                Thread.sleep(1000); // Pequeña pausa entre operaciones
-                
-                // Importar agenda
-                importarAgendaJSON();
-                Thread.sleep(1000); // Pequeña pausa antes de mostrar mensaje final
-                
-                SwingUtilities.invokeLater(() -> {
-                    actualizarEstadoOperacion(jLabel9, "Sincronización completada", true);
-                    setEnabledBotones(true);
-                });
-                
-            } catch (Exception e) {
-                SwingUtilities.invokeLater(() -> {
-                    actualizarEstadoOperacion(jLabel9, "Error: " + e.getMessage(), false);
-                    setEnabledBotones(true);
-                });
-            }
-        });
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-         // Limpiar DB
-        int confirmacion = JOptionPane.showConfirmDialog(this,
-            "¿Está seguro que desea limpiar la base de datos?\nEsta acción no se puede deshacer.",
-            "Confirmar Limpieza",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.WARNING_MESSAGE);
-            
-        if (confirmacion == JOptionPane.YES_OPTION) {
-            jLabel9.setText("Limpiando base de datos...");
-            jLabel9.setForeground(new java.awt.Color(204, 0, 0));
-            limpiarBaseDeDatos();
-        }
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    // Métodos para manejar eventos de botones
-    
-                                       
-
-                                        
-
-
-    private void actualizarEstadoOperacion(javax.swing.JLabel label, String mensaje, boolean exito) {
-        java.awt.Color color = exito ? new java.awt.Color(0, 153, 51) : new java.awt.Color(204, 0, 0);
-        label.setForeground(color);
-        label.setText(mensaje);
-    }
-
-    private void setEnabledBotones(boolean enabled) {
-        jButton2.setEnabled(enabled);
-        jButton3.setEnabled(enabled);
-        jButton4.setEnabled(enabled);
-        jButton5.setEnabled(enabled);
-        jButton6.setEnabled(enabled);
-        jButton7.setEnabled(enabled);
-    }
-
-    @SuppressWarnings("unchecked")
-    private void importarUsuariosJSON() {
-        executorService.submit(() -> {
-            try {
-                SwingUtilities.invokeLater(() -> setEnabledBotones(false));
-                
-                JSONParser parser = new JSONParser();
-                JSONObject jsonData = (JSONObject) parser.parse(new FileReader(USUARIOS_JSON_FILE));
-                JSONArray usuarios = (JSONArray) jsonData.get("usuarios");
-                
-                try (Connection conn = DatabaseConnection.getConnection()) {
-                    try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM usuarios")) {
-                        stmt.executeUpdate();
-                    }
-                    
-                    if (usuarios != null && !usuarios.isEmpty()) {
-                        String sql = "INSERT INTO usuarios (nombre, apellidos, fecha_nacimiento, ciudad, telefono, direccion, email, matricula, carrera) " +
-                                   "VALUES (?, ?, STR_TO_DATE(?, '%Y-%m-%d'), ?, ?, ?, ?, ?, ?)";
-                        
-                        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                            for (Object obj : usuarios) {
-                                JSONObject usuario = (JSONObject) obj;
-                                stmt.setString(1, (String) usuario.get("nombre"));
-                                stmt.setString(2, (String) usuario.get("apellidos"));
-                                stmt.setString(3, (String) usuario.get("fecha_nacimiento"));
-                                stmt.setString(4, (String) usuario.get("ciudad"));
-                                stmt.setString(5, (String) usuario.get("telefono"));
-                                stmt.setString(6, (String) usuario.get("direccion"));
-                                stmt.setString(7, (String) usuario.get("email"));
-                                stmt.setString(8, (String) usuario.get("matricula"));
-                                stmt.setString(9, (String) usuario.get("carrera"));
-                                stmt.executeUpdate();
-                            }
-                        }
-                        SwingUtilities.invokeLater(() -> 
-                            actualizarEstadoOperacion(jLabel7, "Usuarios importados correctamente", true));
-                    } else {
-                        SwingUtilities.invokeLater(() -> 
-                            actualizarEstadoOperacion(jLabel7, "No hay usuarios para importar", false));
-                    }
-                }
-            } catch (Exception e) {
-                SwingUtilities.invokeLater(() -> {
-                    actualizarEstadoOperacion(jLabel7, "Error: " + e.getMessage(), false);
-                    e.printStackTrace();
-                });
-            } finally {
-                SwingUtilities.invokeLater(() -> setEnabledBotones(true));
-            }
-        });
-    }
-    
-    @SuppressWarnings("unchecked")
-    private void importarAgendaJSON() {
-        executorService.submit(() -> {
-            try {
-                SwingUtilities.invokeLater(() -> setEnabledBotones(false));
-                
-                JSONParser parser = new JSONParser();
-                JSONObject jsonData = (JSONObject) parser.parse(new FileReader(AGENDA_JSON_FILE));
-                JSONArray agendas = (JSONArray) jsonData.get("Agenda");
-                
-                try (Connection conn = DatabaseConnection.getConnection()) {
-                    try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM Agenda")) {
-                        stmt.executeUpdate();
-                    }
-                    
-                    if (agendas != null && !agendas.isEmpty()) {
-                        String sql = "INSERT INTO Agenda (Asunto, Fecha, Hora, Anotaciones) " +
-                                   "VALUES (?, STR_TO_DATE(?, '%d/%m/%Y'), ?, ?)";
-                        
-                        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                            for (Object obj : agendas) {
-                                JSONObject agenda = (JSONObject) obj;
-                                stmt.setString(1, (String) agenda.get("Asunto"));
-                                stmt.setString(2, (String) agenda.get("Fecha"));
-                                stmt.setString(3, (String) agenda.get("Hora"));
-                                stmt.setString(4, (String) agenda.get("Anotaciones"));
-                                stmt.executeUpdate();
-                            }
-                        }
-                        SwingUtilities.invokeLater(() -> 
-                            actualizarEstadoOperacion(jLabel8, "Agenda importada correctamente", true));
-                    } else {
-                        SwingUtilities.invokeLater(() -> 
-                            actualizarEstadoOperacion(jLabel8, "No hay agenda para importar", false));
-                    }
-                }
-            } catch (Exception e) {
-                SwingUtilities.invokeLater(() -> {
-                    actualizarEstadoOperacion(jLabel8, "Error: " + e.getMessage(), false);
-                    e.printStackTrace();
-                });
-            } finally {
-                SwingUtilities.invokeLater(() -> setEnabledBotones(true));
-            }
-        });
-    }
-    
-    private void limpiarBaseDeDatos() {
-        executorService.submit(() -> {
-            try {
-                SwingUtilities.invokeLater(() -> setEnabledBotones(false));
-                
-                try (Connection conn = DatabaseConnection.getConnection()) {
-                    // Limpiar tabla usuarios
-                    try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM usuarios")) {
-                        stmt.executeUpdate();
-                    }
-                    
-                    // Limpiar tabla agenda
-                    try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM Agenda")) {
-                        stmt.executeUpdate();
-                    }
-                    
-                    SwingUtilities.invokeLater(() -> 
-                        actualizarEstadoOperacion(jLabel9, "Base de datos limpiada correctamente", true));
-                }
-            } catch (Exception e) {
-                SwingUtilities.invokeLater(() -> {
-                    actualizarEstadoOperacion(jLabel9, "Error al limpiar la base de datos: " + e.getMessage(), false);
-                    e.printStackTrace();
-                });
-            } finally {
-                SwingUtilities.invokeLater(() -> setEnabledBotones(true));
-            }
-        });
-    }
-    
-    @SuppressWarnings("unchecked")
-    private void exportarUsuariosJSON() {
-        executorService.submit(() -> {
-            try {
-                SwingUtilities.invokeLater(() -> setEnabledBotones(false));
-                
-                JSONObject jsonData = new JSONObject();
-                JSONArray usuarios = new JSONArray();
-                
-                try (Connection conn = DatabaseConnection.getConnection();
-                     PreparedStatement stmt = conn.prepareStatement("SELECT id, nombre, apellidos, DATE_FORMAT(fecha_nacimiento, '%Y-%m-%d') as fecha_nacimiento, ciudad, telefono, direccion, email, matricula, carrera FROM usuarios");
-                     java.sql.ResultSet rs = stmt.executeQuery()) {
-                    
-                    while (rs.next()) {
-                        JSONObject usuario = new JSONObject();
-                        usuario.put("id", rs.getLong("id"));
-                        usuario.put("nombre", rs.getString("nombre"));
-                        usuario.put("apellidos", rs.getString("apellidos"));
-                        usuario.put("fecha_nacimiento", rs.getString("fecha_nacimiento"));
-                        usuario.put("ciudad", rs.getString("ciudad"));
-                        usuario.put("telefono", rs.getString("telefono"));
-                        usuario.put("direccion", rs.getString("direccion"));
-                        usuario.put("email", rs.getString("email"));
-                        usuario.put("matricula", rs.getString("matricula"));
-                        usuario.put("carrera", rs.getString("carrera"));
-                        usuarios.add(usuario);
-                    }
-                    
-                    jsonData.put("usuarios", usuarios);
-                    
-                    try (java.io.FileWriter file = new java.io.FileWriter(USUARIOS_JSON_FILE)) {
-                        file.write(jsonData.toJSONString());
-                        file.flush();
-                    }
-                    
-                    SwingUtilities.invokeLater(() -> 
-                        actualizarEstadoOperacion(jLabel7, "Usuarios exportados correctamente", true));
-                }
-            } catch (Exception e) {
-                SwingUtilities.invokeLater(() -> {
-                    actualizarEstadoOperacion(jLabel7, "Error: " + e.getMessage(), false);
-                    e.printStackTrace();
-                });
-            } finally {
-                SwingUtilities.invokeLater(() -> setEnabledBotones(true));
-            }
-        });
-    }
-    
-    @SuppressWarnings("unchecked")
-    private void exportarAgendaJSON() {
-        executorService.submit(() -> {
-            try {
-                SwingUtilities.invokeLater(() -> setEnabledBotones(false));
-                
-                JSONObject jsonData = new JSONObject();
-                JSONArray agendas = new JSONArray();
-                
-                try (Connection conn = DatabaseConnection.getConnection();
-                     PreparedStatement stmt = conn.prepareStatement("SELECT ID, Asunto, DATE_FORMAT(Fecha, '%d/%m/%Y') as Fecha, TIME_FORMAT(Hora, '%H:%i') as Hora, Anotaciones FROM Agenda");
-                     java.sql.ResultSet rs = stmt.executeQuery()) {
-                    
-                    while (rs.next()) {
-                        JSONObject agenda = new JSONObject();
-                        agenda.put("ID", rs.getLong("ID"));
-                        agenda.put("Asunto", rs.getString("Asunto"));
-                        agenda.put("Fecha", rs.getString("Fecha"));
-                        agenda.put("Hora", rs.getString("Hora"));
-                        agenda.put("Anotaciones", rs.getString("Anotaciones"));
-                        agendas.add(agenda);
-                    }
-                    
-                    jsonData.put("Agenda", agendas);
-                    
-                    try (java.io.FileWriter file = new java.io.FileWriter(AGENDA_JSON_FILE)) {
-                        file.write(jsonData.toJSONString());
-                        file.flush();
-                    }
-                    
-                    SwingUtilities.invokeLater(() -> 
-                        actualizarEstadoOperacion(jLabel8, "Agenda exportada correctamente", true));
-                }
-            } catch (Exception e) {
-                SwingUtilities.invokeLater(() -> {
-                    actualizarEstadoOperacion(jLabel8, "Error: " + e.getMessage(), false);
-                    e.printStackTrace();
-                });
-            } finally {
-                SwingUtilities.invokeLater(() -> setEnabledBotones(true));
-            }
-        });
-    }
 
     /**
      * @param args the command line arguments
@@ -695,24 +163,9 @@ public class TestDB extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 }

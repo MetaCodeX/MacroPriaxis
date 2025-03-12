@@ -4,25 +4,22 @@
  */
 package macropriaxis.day0903;
 
+import macropriaxis.db.AgendaDAO;
+import macropriaxis.db.AgendaDAO.Agenda;
 import javax.swing.table.DefaultTableModel;
+import java.sql.Date;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import javax.swing.JOptionPane;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
+
 
 /**
  *
  * @author Carlo
  */
 public class Agenda0903 extends javax.swing.JFrame {
-    private static final String JSON_FILE = "src/macropriaxis/offline/agenda.json";
 
     /**
      * Creates new form Agenda0903
@@ -80,18 +77,10 @@ public class Agenda0903 extends javax.swing.JFrame {
                             String fecha = jTable1.getValueAt(row, 1).toString();
                             String hora = jTable1.getValueAt(row, 2).toString();
                             
-                            // Obtener anotaciones del JSON
-                            JSONParser parser = new JSONParser();
-                            String anotaciones = "";
-                            
-                            try (FileReader reader = new FileReader(JSON_FILE)) {
-                                JSONObject jsonData = (JSONObject) parser.parse(reader);
-                                JSONArray agendas = (JSONArray) jsonData.get("Agenda");
-                                if (agendas != null && row >= 0 && row < agendas.size()) {
-                                    JSONObject agenda = (JSONObject) agendas.get(row);
-                                    anotaciones = (String) agenda.get("Anotaciones");
-                                }
-                            }
+                            // Obtiene todas las agendas de la base de datos
+                            List<Agenda> agendas = AgendaDAO.obtenerTodasLasAgendas();
+                            // Obtiene las anotaciones específicas de la entrada seleccionada
+                            String anotaciones = agendas.get(row).getAnotaciones();
                             
                             // Crea y muestra la ventana de anotaciones con los detalles
                             Anotacion0903 anotacion = new Anotacion0903();
@@ -103,7 +92,6 @@ public class Agenda0903 extends javax.swing.JFrame {
                         } catch (Exception e) {
                             // Muestra un mensaje de error si hay problemas al cargar los detalles
                             JOptionPane.showMessageDialog(null, "Error al cargar los detalles: " + e.getMessage());
-                            e.printStackTrace();
                         }
                     }
                 }
@@ -344,49 +332,24 @@ public class Agenda0903 extends javax.swing.JFrame {
     
     private void actualizarTabla() {
         try {
-            JSONParser parser = new JSONParser();
+            // Obtiene todas las entradas de agenda desde la base de datos
+            List<Agenda> agendas = AgendaDAO.obtenerTodasLasAgendas();
+            // Obtiene el modelo de la tabla para modificarlo
             DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+            // Limpia todas las filas existentes
             modelo.setRowCount(0);
             
-            // Crear el archivo JSON si no existe
-            java.io.File file = new java.io.File(JSON_FILE);
-            if (!file.exists()) {
-                file.getParentFile().mkdirs();
-                JSONObject jsonData = new JSONObject();
-                jsonData.put("Agenda", new JSONArray());
-                try (FileWriter writer = new FileWriter(file)) {
-                    writer.write(jsonData.toJSONString());
-                }
-                return; // Retorna ya que no hay datos que mostrar
-            }
-            
-            try (FileReader reader = new FileReader(JSON_FILE)) {
-                JSONObject jsonData = (JSONObject) parser.parse(reader);
-                JSONArray agendas = (JSONArray) jsonData.get("Agenda");
-                
-                // Si agendas es null, inicializar como un array vacío
-                if (agendas == null) {
-                    agendas = new JSONArray();
-                    jsonData.put("Agenda", agendas);
-                    try (FileWriter writer = new FileWriter(JSON_FILE)) {
-                        writer.write(jsonData.toJSONString());
-                    }
-                    return; // Retorna ya que no hay datos que mostrar
-                }
-                
-                for (Object obj : agendas) {
-                    JSONObject agenda = (JSONObject) obj;
+            // Itera sobre cada entrada de agenda y la añade a la tabla
+            for (Agenda agenda : agendas) {
                 modelo.addRow(new Object[]{
-                        agenda.get("Asunto"),
-                        agenda.get("Fecha"),
-                        agenda.get("Hora")
-                    });
-                }
+                    agenda.getAsunto(),                    // Primera columna: Asunto
+                    new SimpleDateFormat("dd-MM-yyyy").format(agenda.getFecha()),  // Segunda columna: Fecha
+                    new SimpleDateFormat("HH:mm").format(agenda.getHora())        // Tercera columna: Hora
+                });
             }
         } catch (Exception e) {
             // Muestra un mensaje de error si hay problemas al cargar los datos
             JOptionPane.showMessageDialog(this, "Error al cargar las agendas: " + e.getMessage());
-            e.printStackTrace(); // Para ver el error detallado en la consola
         }
     }
     
@@ -414,45 +377,23 @@ public class Agenda0903 extends javax.swing.JFrame {
             String fechaStr = jTextField2.getText().trim().replace("-", "/");
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             dateFormat.setLenient(false); // No permite fechas inválidas
-            dateFormat.parse(fechaStr); // Solo para validar
+            java.util.Date utilDate = dateFormat.parse(fechaStr);
+            Date sqlDate = new Date(utilDate.getTime());
             
             // Procesa y valida el formato de la hora (HH:mm)
             String horaStr = jTextField3.getText().trim();
             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
             timeFormat.setLenient(false); // No permite horas inválidas
-            timeFormat.parse(horaStr); // Solo para validar
+            java.util.Date utilTime = timeFormat.parse(horaStr);
+            Time sqlTime = new Time(utilTime.getTime());
             
-            // Crear objeto JSON
-            JSONObject agenda = new JSONObject();
-            agenda.put("ID", System.currentTimeMillis());
-            agenda.put("Asunto", jTextField1.getText().trim());
-            agenda.put("Fecha", fechaStr);
-            agenda.put("Hora", horaStr);
-            agenda.put("Anotaciones", jTextArea1.getText().trim());
-            
-            // Leer archivo existente
-            JSONParser parser = new JSONParser();
-            JSONObject jsonData;
-            try (FileReader reader = new FileReader(JSON_FILE)) {
-                jsonData = (JSONObject) parser.parse(reader);
-            } catch (Exception e) {
-                jsonData = new JSONObject();
-                jsonData.put("Agenda", new JSONArray());
-            }
-            
-            // Añadir nueva agenda
-            JSONArray agendas = (JSONArray) jsonData.get("Agenda");
-            if (agendas == null) {
-                agendas = new JSONArray();
-                jsonData.put("Agenda", agendas);
-            }
-            agendas.add(agenda);
-            
-            // Guardar archivo
-            try (FileWriter file = new FileWriter(JSON_FILE)) {
-                file.write(jsonData.toJSONString());
-                file.flush();
-            }
+            // Guarda la nueva entrada en la base de datos
+            AgendaDAO.insertarAgenda(
+                jTextField1.getText().trim(), // Asunto
+                sqlDate,                      // Fecha convertida
+                sqlTime,                      // Hora convertida
+                jTextArea1.getText().trim()   // Anotaciones
+            );
             
             // Limpia los campos después de guardar
             limpiarCampos();
@@ -465,12 +406,9 @@ public class Agenda0903 extends javax.swing.JFrame {
         } catch (ParseException e) {
             // Muestra error si el formato de fecha u hora es incorrecto
             JOptionPane.showMessageDialog(this, "Error en el formato de fecha u hora: " + e.getMessage());
-        } catch (IOException e) {
-            // Muestra error si hay problemas al guardar en el archivo
-            JOptionPane.showMessageDialog(this, "Error al guardar la agenda: " + e.getMessage());
         } catch (Exception e) {
-            // Muestra error si hay problemas al guardar en el archivo
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            // Muestra error si hay problemas al guardar en la base de datos
+            JOptionPane.showMessageDialog(this, "Error al guardar la agenda: " + e.getMessage());
         }
     }
 }

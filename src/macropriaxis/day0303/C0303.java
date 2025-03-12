@@ -3,21 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package macropriaxis.day0303;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import javax.swing.JOptionPane;
-
+import macropriaxis.db.*;
 /**
  *
  * @author Carlo
  */
 public class C0303 extends javax.swing.JFrame {
-    private static final String JSON_FILE = "src/macropriaxis/offline/usuarios.json";
 
     /**
      * Creates new form C0303
@@ -290,99 +281,69 @@ public class C0303 extends javax.swing.JFrame {
             jTextField8.getText().trim().isEmpty() || 
             jTextField9.getText().trim().isEmpty()) {
             
-            JOptionPane.showMessageDialog(this,
+            javax.swing.JOptionPane.showMessageDialog(this,
                 "Los campos Nombre, Apellidos, Fecha de Nacimiento, Matrícula y Carrera son obligatorios.",
                 "Error de Validación",
-                JOptionPane.ERROR_MESSAGE);
+                javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // Validar formato de fecha
         String fecha = jTextField3.getText().trim();
         if (!validarFormatoFecha(fecha)) {
-            JOptionPane.showMessageDialog(this,
+            javax.swing.JOptionPane.showMessageDialog(this,
                 "El formato de fecha debe ser YYYY-MM-DD (ejemplo: 2002-10-18)",
                 "Error de Formato",
-                JOptionPane.ERROR_MESSAGE);
+                javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         try {
-            // Leer el archivo JSON existente primero para obtener el último ID
-            JSONParser parser = new JSONParser();
-            JSONObject jsonData;
-            long nextId = 1; // ID por defecto si no hay usuarios
+            // Crear objeto Usuario con los datos del formulario
+            Usuario usuario = new Usuario(
+                jTextField1.getText().trim(),  // nombre
+                jTextField2.getText().trim(),  // apellidos
+                jTextField3.getText().trim(),  // fecha_nacimiento
+                jTextField4.getText().trim(),  // ciudad
+                jTextField5.getText().trim(),  // telefono
+                jTextField6.getText().trim(),  // direccion
+                jTextField7.getText().trim(),  // email
+                jTextField8.getText().trim(),  // matricula
+                jTextField9.getText().trim()   // carrera
+            );
 
-            try (FileReader reader = new FileReader(JSON_FILE)) {
-                jsonData = (JSONObject) parser.parse(reader);
-                JSONArray usuarios = (JSONArray) jsonData.get("usuarios");
+            // Crear instancia de UsuarioDAO y guardar el usuario
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            boolean guardadoExitoso = usuarioDAO.insertarUsuario(usuario);
+
+            if (guardadoExitoso) {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                    "Usuario guardado exitosamente",
+                    "Éxito",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
                 
-                if (usuarios != null && !usuarios.isEmpty()) {
-                    // Encontrar el ID más alto
-                    long maxId = 0;
-                    for (Object obj : usuarios) {
-                        JSONObject user = (JSONObject) obj;
-                        long userId = (Long) user.get("id");
-                        if (userId > maxId) {
-                            maxId = userId;
-                        }
-                    }
-                    nextId = maxId + 1; // El siguiente ID será el máximo + 1
-                }
-            } catch (Exception e) {
-                jsonData = new JSONObject();
-                jsonData.put("usuarios", new JSONArray());
+                // Limpiar los campos después de guardar
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jTextField3.setText("");
+                jTextField4.setText("");
+                jTextField5.setText("");
+                jTextField6.setText("");
+                jTextField7.setText("");
+                jTextField8.setText("");
+                jTextField9.setText("");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                    "Error al guardar el usuario",
+                    "Error",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
             }
 
-            // Crear objeto JSON con los datos del usuario
-            JSONObject usuario = new JSONObject();
-            usuario.put("id", nextId);
-            usuario.put("nombre", jTextField1.getText().trim());
-            usuario.put("apellidos", jTextField2.getText().trim());
-            usuario.put("fechaNacimiento", jTextField3.getText().trim());
-            usuario.put("ciudad", jTextField4.getText().trim());
-            usuario.put("telefono", jTextField5.getText().trim());
-            usuario.put("direccion", jTextField6.getText().trim());
-            usuario.put("email", jTextField7.getText().trim());
-            usuario.put("matricula", jTextField8.getText().trim());
-            usuario.put("carrera", jTextField9.getText().trim());
-
-            // Obtener el array de usuarios y añadir el nuevo usuario
-            JSONArray usuarios = (JSONArray) jsonData.get("usuarios");
-            usuarios.add(usuario);
-
-            // Guardar el JSON actualizado
-            try (FileWriter file = new FileWriter(JSON_FILE)) {
-                file.write(jsonData.toJSONString());
-                file.flush();
-            }
-
-            JOptionPane.showMessageDialog(this,
-                "Usuario guardado exitosamente con ID: " + nextId,
-                "Éxito",
-                JOptionPane.INFORMATION_MESSAGE);
-            
-            // Limpiar los campos después de guardar
-            jTextField1.setText("");
-            jTextField2.setText("");
-            jTextField3.setText("");
-            jTextField4.setText("");
-            jTextField5.setText("");
-            jTextField6.setText("");
-            jTextField7.setText("");
-            jTextField8.setText("");
-            jTextField9.setText("");
-
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this,
-                "Error al guardar el usuario: " + e.getMessage(),
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,
+            javax.swing.JOptionPane.showMessageDialog(this,
                 "Error: " + e.getMessage(),
                 "Error",
-                JOptionPane.ERROR_MESSAGE);
+                javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }
 

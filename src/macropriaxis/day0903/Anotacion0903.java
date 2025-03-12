@@ -4,11 +4,6 @@
  */
 package macropriaxis.day0903;
 
-import java.io.FileReader;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
 /**
  *
  * @author Carlo
@@ -19,6 +14,7 @@ public class Anotacion0903 extends javax.swing.JFrame {
      * Creates new form Anotacion0903
      */
     public Anotacion0903() {
+        // Configurar el Look and Feel antes de inicializar componentes
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -27,6 +23,7 @@ public class Anotacion0903 extends javax.swing.JFrame {
                 }
             }
         } catch (Exception ex) {
+            // Si falla, continuará con el Look and Feel por defecto
             System.out.println("No se pudo establecer el Look and Feel Nimbus");
         }
 
@@ -36,55 +33,48 @@ public class Anotacion0903 extends javax.swing.JFrame {
         macropriaxis.util.ImageLoader.setFrameBackgroundImage(this, "/macropriaxis/media/WIN7-2.jpg");
         this.setLocationRelativeTo(null);
         
+        // Configurar el área de texto
         jTextArea1.setEditable(false);
         jTextArea1.setWrapStyleWord(true);
         
+        // Configurar textos de los botones
         jButton1.setText("Salir");
         jButton2.setText("Volver");
         
-        jButton1.addActionListener(evt -> this.dispose());
-        jButton2.addActionListener(evt -> this.dispose());
+        // Añadir listeners a los botones
+        jButton1.addActionListener((java.awt.event.ActionEvent evt) -> {
+            jButton1ActionPerformed(evt);
+        });
+        
+        jButton2.addActionListener((java.awt.event.ActionEvent evt) -> {
+            jButton2ActionPerformed(evt);
+        });
+        
+    
     }
     
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+     
+            this.dispose(); // Cierra la ventana actual
+    }                                        
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        this.dispose(); // Modificado para solo cerrar esta ventana en lugar de toda la aplicación
+    }
+    
+    // Método para mostrar los detalles
     public void mostrarDetalles(String asunto, String fecha, String hora, String anotaciones) {
-        // Configura el título de la ventana
-        this.setTitle("Detalles de la Agenda");
-        
-        // Configura los labels con la información
+        this.setTitle("Detalles: " + asunto);
         jLabel1.setText(asunto);
         jLabel2.setText("Fecha: " + fecha);
         jLabel3.setText("Hora: " + hora);
+        jTextArea1.setText(anotaciones);
         
-        // Configura el área de texto con las anotaciones
-        if (anotaciones != null && !anotaciones.trim().isEmpty()) {
-            jTextArea1.setText(anotaciones);
-        } else {
-            jTextArea1.setText("No hay anotaciones disponibles");
-        }
+    
         
-        // Ajusta el tamaño de la ventana y la centra
+        // Hacer visible la ventana en el centro de la pantalla
         this.pack();
         this.setLocationRelativeTo(null);
-    }
-
-    // Método para obtener las anotaciones del JSON
-    public static String obtenerAnotaciones(String jsonFile, int row) {
-        try {
-            JSONParser parser = new JSONParser();
-            try (FileReader reader = new FileReader(jsonFile)) {
-                JSONObject jsonData = (JSONObject) parser.parse(reader);
-                JSONArray agendas = (JSONArray) jsonData.get("Agenda");
-                
-                if (agendas != null && row >= 0 && row < agendas.size()) {
-                    JSONObject agenda = (JSONObject) agendas.get(row);
-                    return (String) agenda.get("Anotaciones");
-                }
-            }
-        } catch (Exception e) {
-            System.err.println("Error al obtener anotaciones: " + e.getMessage());
-            e.printStackTrace();
-        }
-        return "No se pudieron cargar las anotaciones";
     }
 
     /**
