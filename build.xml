@@ -16,18 +16,29 @@
 
     <!-- Target personalizado para incluir el controlador JDBC en el JAR -->
     <target name="-post-jar">
-        <!-- Crear la carpeta lib dentro del directorio de distribución -->
-        <mkdir dir="${dist.dir}/lib"/>
-
-        <!-- Copiar el controlador JDBC a la carpeta lib dentro del directorio de distribución -->
-        <copy file="src/macropriaxis/db/${mysql.connector.jar}" todir="${dist.dir}/lib"/>
-
-        <!-- Actualizar el MANIFEST.MF para incluir el controlador JDBC en el classpath -->
-        <jar destfile="${dist.jar}" update="true">
+        <!-- Crear directorio temporal -->
+        <mkdir dir="${dist.dir}/temp"/>
+        
+        <!-- Extraer el contenido del JAR principal -->
+        <unjar src="${dist.jar}" dest="${dist.dir}/temp"/>
+        
+        <!-- Extraer el contenido del conector MySQL -->
+        <unjar src="src/macropriaxis/db/${mysql.connector.jar}" dest="${dist.dir}/temp"/>
+        
+        <!-- Eliminar el JAR original -->
+        <delete file="${dist.jar}"/>
+        
+        <!-- Crear el nuevo JAR con todo el contenido -->
+        <jar destfile="${dist.jar}" basedir="${dist.dir}/temp">
             <manifest>
-                <attribute name="Class-Path" value="lib/${mysql.connector.jar}"/>
+                <attribute name="Main-Class" value="macropriaxis.main"/>
+                <attribute name="Class-Path" value="."/>
             </manifest>
         </jar>
+        
+        <!-- Limpiar: eliminar directorio temporal y cualquier carpeta lib -->
+        <delete dir="${dist.dir}/temp"/>
+        <delete dir="${dist.dir}/lib"/>
     </target>
 
     <!-- Eliminar archivos .class no deseados después de crear el JAR -->

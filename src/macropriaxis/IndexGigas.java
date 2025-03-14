@@ -9,8 +9,8 @@ import macropriaxis.gui.TriQiArea;
 import macropriaxis.gui.UVFrame;
 import macropriaxis.db.TestDB;
 import macropriaxis.day0303.Menu0303;
-import macropriaxis.day0903.Agenda0903;
-import macropriaxis.day0903.Main0903;
+import macropriaxis.day0309.Main0903;
+import macropriaxis.day0313.index0313;
 /**
  *
  * @author Carlo
@@ -54,6 +54,7 @@ macropriaxis.util.ImageLoader.setImageToLabel(jLabel2, image2Path);
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MetacodeX Presents // MacroPriaxis");
@@ -127,6 +128,13 @@ macropriaxis.util.ImageLoader.setImageToLabel(jLabel2, image2Path);
             }
         });
 
+        jButton9.setText("Actividad 13 de Marzo");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -164,6 +172,8 @@ macropriaxis.util.ImageLoader.setImageToLabel(jLabel2, image2Path);
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                             .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(18, 18, 18)
+                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -172,7 +182,9 @@ macropriaxis.util.ImageLoader.setImageToLabel(jLabel2, image2Path);
                 .addGap(21, 21, 21)
                 .addComponent(jLabel3)
                 .addGap(9, 9, 9)
-                .addComponent(jButton1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -253,9 +265,18 @@ macropriaxis.util.ImageLoader.setImageToLabel(jLabel2, image2Path);
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         Main0903 main0903 = new Main0903();
-main0903.setVisible(true);
-this.dispose(); // Cierra la ventana actual
+        main0903.setVisible(true);
+        this.dispose(); // Cierra la ventana actual
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // Botón "OtrasApps": Crea una nueva instancia de la ventana IndexGigas
+        index0313 Index0313 = new index0313();
+        // Hace visible la nueva ventana
+        Index0313.setVisible(true);
+        // Cierra la ventana actual (Main0903)
+        this.dispose(); 
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,6 +322,7 @@ this.dispose(); // Cierra la ventana actual
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
