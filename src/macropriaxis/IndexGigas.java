@@ -11,6 +11,7 @@ import macropriaxis.db.TestDB;
 import macropriaxis.day0303.Menu0303;
 import macropriaxis.day0309.Main0903;
 import macropriaxis.day0313.index0313;
+import macropriaxis.day0320.calc0320;
 /**
  *
  * @author Carlo
@@ -55,6 +56,7 @@ macropriaxis.util.ImageLoader.setImageToLabel(jLabel2, image2Path);
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MetacodeX Presents // MacroPriaxis");
@@ -135,6 +137,15 @@ macropriaxis.util.ImageLoader.setImageToLabel(jLabel2, image2Path);
             }
         });
 
+        jButton10.setText("Actividad 20 de Marzo");
+        jButton10.setToolTipText("");
+        jButton10.setActionCommand("Actividad 20 de Marzo");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -173,7 +184,9 @@ macropriaxis.util.ImageLoader.setImageToLabel(jLabel2, image2Path);
                             .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                             .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -186,7 +199,9 @@ macropriaxis.util.ImageLoader.setImageToLabel(jLabel2, image2Path);
                     .addComponent(jButton1)
                     .addComponent(jButton9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -278,6 +293,15 @@ macropriaxis.util.ImageLoader.setImageToLabel(jLabel2, image2Path);
         this.dispose(); 
     }//GEN-LAST:event_jButton9ActionPerformed
 
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+         // Botón "OtrasApps": Crea una nueva instancia de la ventana IndexGigas
+        calc0320 calc = new calc0320();
+        // Hace visible la nueva ventana
+        calc.setVisible(true);
+        // Cierra la ventana actual (Main0903)
+        this.dispose();
+    }//GEN-LAST:event_jButton10ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -315,6 +339,7 @@ macropriaxis.util.ImageLoader.setImageToLabel(jLabel2, image2Path);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
