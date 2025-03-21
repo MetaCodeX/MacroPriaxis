@@ -4,40 +4,35 @@
  */
 package macropriaxis.day0320;
 import macropriaxis.IndexGigas;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 /**
  *
- * @author zS23007690
+ * @author metaCodeX y revisada y los comentarios revisados por Fany <3
  */
 public class calc0320 extends javax.swing.JFrame {
 
     // Variables para la calculadora
-    private double numero1;
-    private double numero2;
-    private String operacion;
-    private boolean nuevoNumero;
-    private StringBuilder displaySecundario;
+    private double numeroActual;      // Almacena el número que se está digitando actualmente
+    private double numeroMemoria;     // Almacena el número anterior para operaciones
+    private String operacionPendiente;// Guarda la operación que se realizará (+, -, ×, ÷)
+    private boolean iniciarNuevoNumero; // Indica si se debe iniciar un nuevo número
+    private static final int MAX_DIGITOS = 10; // Límite de dígitos permitidos
+    private DecimalFormat formatoNumerico; // Formateador de números
+    private StringBuilder historialOperaciones; // Guarda la secuencia de operaciones tal como se digitan
+    private static final int MAX_DISPLAY_LENGTH = 25; // Máximo de caracteres visibles
+    private float fuenteOriginal;
 
     /**
      * Creates new form calc0320
      */
     public calc0320() {
         initComponents();
-        this.setLocationRelativeTo(null);
-        jPanel1.setOpaque(false);
-        macropriaxis.util.ImageLoader.setFrameBackgroundImage(this, "/macropriaxis/media/WIN7-3.jpg");
-        
-        // Inicializar variables
         inicializarCalculadora();
-        
-        // Configurar displays
-        jLabel1.setText("0");
-        jLabel3.setText("");
-        
-        // Agregar ActionListeners a los botones numéricos
-        configurarBotonesNumericos();
-        
-        // Agregar ActionListeners a los botones de operaciones
-        configurarBotonesOperaciones();
+        configurarInterfaz();
+        configurarEventosBotones();
+        fuenteOriginal = jLabel1.getFont().getSize2D();
     }
 
     /**
@@ -49,6 +44,7 @@ public class calc0320 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSlider1 = new javax.swing.JSlider();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -83,7 +79,7 @@ public class calc0320 extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(204, 204, 204), new java.awt.Color(153, 153, 153), new java.awt.Color(153, 153, 153), new java.awt.Color(204, 204, 204)));
 
-        jLabel1.setFont(new java.awt.Font("OPTICalculator", 0, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Pocket Calculator OT", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("jLabel1");
@@ -111,23 +107,22 @@ public class calc0320 extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("OPTICalculator", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("jLabel3");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jButton1.setBackground(new java.awt.Color(204, 255, 255));
@@ -230,14 +225,14 @@ public class calc0320 extends javax.swing.JFrame {
         jLabel2.setText("MacroStasis®");
 
         jLabel4.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
-        jLabel4.setText("MetaCalc!! - V 1.0");
+        jLabel4.setText("MetaCalc - V 1.5");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -281,11 +276,11 @@ public class calc0320 extends javax.swing.JFrame {
                                 .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(38, 38, 38)
                         .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,7 +304,7 @@ public class calc0320 extends javax.swing.JFrame {
                         .addGap(19, 19, 19))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -329,11 +324,10 @@ public class calc0320 extends javax.swing.JFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
@@ -427,163 +421,322 @@ public class calc0320 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JSlider jSlider1;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Inicializa la calculadora con sus valores por defecto
+     * - Limpia las variables numéricas
+     * - Configura el formato de números
+     * - Inicializa los displays
+     */
     private void inicializarCalculadora() {
-        numero1 = 0;
-        numero2 = 0;
-        operacion = "";
-        nuevoNumero = true;
-        displaySecundario = new StringBuilder();
+        numeroActual = 0;
+        numeroMemoria = 0;
+        operacionPendiente = "";
+        iniciarNuevoNumero = true;
+        historialOperaciones = new StringBuilder();
+        
+        // Configurar formato numérico (ejemplo: 1,234.56)
+        DecimalFormatSymbols simbolos = new DecimalFormatSymbols(Locale.US);
+        formatoNumerico = new DecimalFormat("#,##0.######", simbolos);
+        formatoNumerico.setMaximumIntegerDigits(MAX_DIGITOS);
+        
+        jLabel1.setText("0");  // Display principal
+        jLabel3.setText("0");  // Display secundario
     }
     
-    private void configurarBotonesNumericos() {
-        jButton1.addActionListener(e -> agregarNumero("7"));
-        jButton3.addActionListener(e -> agregarNumero("8"));
-        jButton4.addActionListener(e -> agregarNumero("9"));
-        jButton7.addActionListener(e -> agregarNumero("4"));
-        jButton6.addActionListener(e -> agregarNumero("5"));
-        jButton5.addActionListener(e -> agregarNumero("6"));
-        jButton17.addActionListener(e -> agregarNumero("1"));
-        jButton9.addActionListener(e -> agregarNumero("2"));
-        jButton8.addActionListener(e -> agregarNumero("3"));
-        jButton11.addActionListener(e -> agregarNumero("0"));
+    private void configurarInterfaz() {
+        this.setLocationRelativeTo(null);
+        jPanel1.setOpaque(false);
+        macropriaxis.util.ImageLoader.setFrameBackgroundImage(this, "/macropriaxis/media/WIN7-3.jpg");
+        
+        // Configurar el display principal para alineación derecha
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    }
+    
+    private void configurarEventosBotones() {
+        // Botones numéricos
+        jButton1.addActionListener(e -> agregarDigito("7"));
+        jButton3.addActionListener(e -> agregarDigito("8"));
+        jButton4.addActionListener(e -> agregarDigito("9"));
+        jButton7.addActionListener(e -> agregarDigito("4"));
+        jButton6.addActionListener(e -> agregarDigito("5"));
+        jButton5.addActionListener(e -> agregarDigito("6"));
+        jButton17.addActionListener(e -> agregarDigito("1"));
+        jButton9.addActionListener(e -> agregarDigito("2"));
+        jButton8.addActionListener(e -> agregarDigito("3"));
+        jButton11.addActionListener(e -> agregarDigito("0"));
         jButton13.addActionListener(e -> agregarDecimal());
-    }
-    
-    private void configurarBotonesOperaciones() {
+
+        // Botones de operaciones
         jButton15.addActionListener(e -> procesarOperacion("+"));
         jButton2.addActionListener(e -> procesarOperacion("-"));
-        jButton18.addActionListener(e -> procesarOperacion("*"));
-        jButton16.addActionListener(e -> procesarOperacion("/"));
-        jButton12.addActionListener(e -> calcularResultado());
+        jButton18.addActionListener(e -> procesarOperacion("×"));
+        jButton16.addActionListener(e -> procesarOperacion("÷"));
+        jButton12.addActionListener(e -> calcularResultado(true));
         jButton10.addActionListener(e -> limpiarCalculadora());
         jButton20.addActionListener(e -> calcularRaizCuadrada());
         jButton21.addActionListener(e -> calcularPorcentaje());
-        
-        // Configurar el botón ON/OFF
-        jButton14.addActionListener(e -> {
-            IndexGigas indexGigas = new IndexGigas();
-            indexGigas.setVisible(true);
-            this.dispose();
-        });
+        jButton14.addActionListener(e -> volverAlMenu());
     }
     
-    private void agregarNumero(String digito) {
-        if (nuevoNumero) {
-            jLabel1.setText(digito);
-            nuevoNumero = false;
-        } else {
-            if (jLabel1.getText().equals("0")) {
-                jLabel1.setText(digito);
+    /**
+     * Agrega un dígito al número actual
+     * Ejemplo: Si el display muestra "12" y se presiona "3", quedará "123"
+     * @param digito El dígito a agregar (0-9)
+     */
+    private void agregarDigito(String digito) {
+        // Si se debe iniciar un nuevo número, reemplazar el display
+        if (iniciarNuevoNumero) {
+            jLabel3.setText(digito);
+            iniciarNuevoNumero = false;
+        } 
+        // Si no se ha alcanzado el límite de dígitos, agregar el nuevo dígito
+        else if (jLabel3.getText().length() < MAX_DIGITOS) {
+            if (jLabel3.getText().equals("0")) {
+                jLabel3.setText(digito);  // Reemplazar el 0 inicial
             } else {
-                jLabel1.setText(jLabel1.getText() + digito);
+                jLabel3.setText(jLabel3.getText() + digito);  // Agregar al final
             }
         }
-        actualizarDisplaySecundario(digito);
+        numeroActual = Double.parseDouble(jLabel3.getText());
+        actualizarDisplayPrincipal();
     }
     
     private void agregarDecimal() {
-        if (!jLabel1.getText().contains(".")) {
-            jLabel1.setText(jLabel1.getText() + ".");
-            actualizarDisplaySecundario(".");
+        if (iniciarNuevoNumero) {
+            jLabel3.setText("0.");
+            iniciarNuevoNumero = false;
+        } else if (!jLabel3.getText().contains(".")) {
+            jLabel3.setText(jLabel3.getText() + ".");
         }
+        actualizarDisplayPrincipal();
     }
     
-    private void procesarOperacion(String op) {
-        if (!operacion.isEmpty()) {
-            calcularResultadoParcial();
+    /**
+     * Procesa una operación matemática (+, -, ×, ÷)
+     * Mantiene el historial exacto de lo que digita el usuario en el display principal
+     * mientras muestra resultados parciales en el display secundario
+     * 
+     * @param operacion La operación a realizar
+     */
+    private void procesarOperacion(String operacion) {
+        // Si el historial está vacío, agregamos el número actual como inicio de la operación
+        // (Ejemplo: Si digitamos "5 +", primero guardamos el "5")
+        if (historialOperaciones.length() == 0) {
+            historialOperaciones.append(jLabel3.getText());
+        } 
+        // Si no estamos iniciando un nuevo número, agregamos el número actual al historial
+        // (Ejemplo: Si tenemos "5 + " y acabamos de digitar "3", guardamos el "3" antes del nuevo operador)
+        else if (!iniciarNuevoNumero) {
+            historialOperaciones.append(jLabel3.getText());
         }
-        numero1 = Double.parseDouble(jLabel1.getText());
-        operacion = op;
-        nuevoNumero = true;
-        actualizarDisplaySecundario(op);
-    }
-    
-    private void calcularResultadoParcial() {
-        if (!operacion.isEmpty()) {
-            numero2 = Double.parseDouble(jLabel1.getText());
-            numero1 = realizarOperacion();
-            actualizarDisplayPrincipal(numero1);
-        }
-    }
-    
-    private void calcularResultado() {
-        if (!operacion.isEmpty()) {
-            numero2 = Double.parseDouble(jLabel1.getText());
-            double resultado = realizarOperacion();
-            actualizarDisplayPrincipal(resultado);
-            jLabel3.setText(displaySecundario.toString() + "=" + resultado);
-            inicializarCalculadora();
-        }
-    }
-    
-    private double realizarOperacion() {
-        switch (operacion) {
-            case "+": return numero1 + numero2;
-            case "-": return numero1 - numero2;
-            case "*": return numero1 * numero2;
-            case "/": 
-                if (numero2 == 0) {
-                    javax.swing.JOptionPane.showMessageDialog(
-                        this,
-                        "¡No es posible dividir entre cero!",
-                        "Error matemático",
-                        javax.swing.JOptionPane.ERROR_MESSAGE
-                    );
-                    limpiarCalculadora();
-                    return 0;
-                }
-                return numero1 / numero2;
-            default: return numero2;
-        }
-    }
-    
-    private void limpiarCalculadora() {
-        inicializarCalculadora();
-        jLabel1.setText("0");
-        jLabel3.setText("");
-    }
-    
-    private void calcularRaizCuadrada() {
-        double numero = Double.parseDouble(jLabel1.getText());
-        double resultado = Math.sqrt(numero);
-        actualizarDisplayPrincipal(resultado);
-        displaySecundario = new StringBuilder("√(" + numero + ")");
-        jLabel3.setText(displaySecundario.toString());
-    }
-    
-    private void calcularPorcentaje() {
-        if (!operacion.isEmpty()) {
-            double porcentaje = Double.parseDouble(jLabel1.getText()) / 100;
-            numero2 = numero1 * porcentaje;
-            actualizarDisplayPrincipal(numero2);
-            displaySecundario.append("%");
-            jLabel3.setText(displaySecundario.toString());
-        }
-    }
-    
-    private void actualizarDisplaySecundario(String valor) {
-        if (nuevoNumero && !valor.matches("[0-9.]")) {
-            displaySecundario.append(valor);
-        } else {
-            if (displaySecundario.length() == 0 || nuevoNumero) {
-                displaySecundario.append(valor);
-            } else {
-                displaySecundario.append(valor);
+        
+        // Agregamos la operación al historial con espacios para mejor legibilidad
+        // (Ejemplo: "5" + " + " = "5 + ")
+        historialOperaciones.append(" ").append(operacion).append(" ");
+        
+        // Si hay una operación pendiente, calculamos el resultado parcial
+        // (Ejemplo: Si tenemos "5 + 3" y presionamos "-", calculamos "5 + 3 = 8" antes de agregar el "-")
+        if (!operacionPendiente.isEmpty()) {
+            double resultado = calcularOperacion(numeroMemoria, numeroActual, operacionPendiente);
+            if (resultado != Double.NEGATIVE_INFINITY) {  // Si no hubo error en el cálculo
+                jLabel3.setText(formatearNumero(resultado)); // Mostramos el resultado en display secundario
+                numeroMemoria = resultado; // Guardamos el resultado para la siguiente operación
             }
+        } else {
+            // Si no hay operación pendiente, el número actual se convierte en la memoria
+            // (Ejemplo: Al digitar "5 +", el 5 se guarda como numeroMemoria)
+            numeroMemoria = numeroActual;
         }
-        jLabel3.setText(displaySecundario.toString());
+        
+        // Guardamos la nueva operación como pendiente y preparamos para recibir un nuevo número
+        // (Ejemplo: Al presionar "+", se guarda como operacionPendiente para usarla cuando se digite el siguiente número)
+        operacionPendiente = operacion;
+        iniciarNuevoNumero = true;
+        
+        // Actualizamos el display principal con el historial completo
+        // (Ejemplo: "5 + 3 -" se muestra en el display principal)
+        jLabel1.setText(historialOperaciones.toString());
     }
 
-    private void actualizarDisplayPrincipal(double numero) {
-        // Formatea el número a máximo 10 dígitos totales
-        String resultado;
-        if (String.valueOf(numero).length() > 10) {
-            resultado = String.format("%.8e", numero); // Notación científica
-        } else {
-            resultado = String.format("%.8g", numero); // Formato general
+    /**
+     * Realiza el cálculo entre dos números según la operación especificada
+     * @param num1 Primer número de la operación
+     * @param num2 Segundo número de la operación
+     * @param operacion Operador matemático a aplicar
+     * @return Resultado del cálculo o NEGATIVE_INFINITY si hay error
+     */
+    private double calcularOperacion(double num1, double num2, String operacion) {
+        // Realizamos la operación correspondiente según el operador
+        switch (operacion) {
+            case "+": 
+                return num1 + num2;  // (Ejemplo: 5 + 3 = 8)
+            case "-": 
+                return num1 - num2;  // (Ejemplo: 8 - 3 = 5)
+            case "×": 
+                return num1 * num2;  // (Ejemplo: 4 × 3 = 12)
+            case "÷":
+                // Verificamos división por cero para evitar errores
+                if (num2 == 0) {
+                    mostrarError("No se puede dividir entre cero");  // (Ejemplo: 5 ÷ 0 = Error)
+                    return Double.NEGATIVE_INFINITY;
+                }
+                return num1 / num2;  // (Ejemplo: 10 ÷ 2 = 5)
+            default: 
+                return num1;  // Si no hay operación válida, retornamos el primer número
         }
-        jLabel1.setText(resultado);
+    }
+
+    /**
+     * Formatea un número según su magnitud para mostrarlo en el display
+     * @param numero Número a formatear
+     * @return Número formateado como String
+     */
+    private String formatearNumero(double numero) {
+        // Si el número es muy grande o muy pequeño, usamos notación científica
+        // (Ejemplo: 1234567890 -> "1.234E9")
+        if (Math.abs(numero) >= 1e7 || (Math.abs(numero) < 0.000001 && numero != 0)) {
+            DecimalFormat formatoCientifico = new DecimalFormat("0.######E0");
+            return formatoCientifico.format(numero);
+        } else {
+            // Para números normales, usamos formato decimal
+            // (Ejemplo: 1234.5678 -> "1,234.567")
+            return formatoNumerico.format(numero);
+        }
+    }
+    
+    /**
+     * Calcula el resultado final o parcial de la operación
+     * @param esFinal true si se presionó "=", false para cálculos intermedios
+     */
+    private void calcularResultado(boolean esFinal) {
+        // Solo calculamos si hay una operación pendiente
+        // (Ejemplo: Si tenemos "5 + 3" y presionamos "=")
+        if (!operacionPendiente.isEmpty()) {
+            // Realizamos el cálculo con la operación pendiente
+            // (Ejemplo: numeroMemoria = 5, numeroActual = 3, operacionPendiente = "+")
+            double resultado = calcularOperacion(numeroMemoria, numeroActual, operacionPendiente);
+            if (resultado == Double.NEGATIVE_INFINITY) return; // Si hubo error, salimos
+            
+            if (esFinal) {
+                // Si es el cálculo final (se presionó "=")
+                // (Ejemplo: "5 + 3 =" -> Display principal: "8", Display secundario: "Completado")
+                jLabel1.setText(formatearNumero(resultado));
+                jLabel3.setText("Completado");
+                historialOperaciones = new StringBuilder(); // Limpiamos el historial para nueva operación
+            } else {
+                // Si es un cálculo parcial
+                // (Ejemplo: Al presionar una nueva operación, mostramos el resultado parcial)
+                jLabel3.setText(formatearNumero(resultado));
+                numeroActual = resultado; // El resultado se convierte en el número actual
+            }
+            
+            // Limpiamos la operación pendiente y preparamos para nuevo número
+            operacionPendiente = "";
+            iniciarNuevoNumero = true;
+        }
+    }
+
+    /**
+     * Actualiza el display principal mostrando la operación completa
+     */
+    private void actualizarDisplayPrincipal() {
+        // Si hay operaciones en el historial, las mostramos
+        if (historialOperaciones.length() > 0) {
+            String displayText = historialOperaciones.toString();
+            // Si no estamos iniciando un nuevo número, agregamos el número actual
+            // (Ejemplo: Si el historial es "5 + " y estamos digitando "3", muestra "5 + 3")
+            if (!iniciarNuevoNumero) {
+                displayText += jLabel3.getText();
+            }
+            jLabel1.setText(displayText);
+        } else {
+            // Si no hay historial, mostramos solo el número actual
+            // (Ejemplo: Al iniciar y digitar "5", solo muestra "5")
+            jLabel1.setText(jLabel3.getText());
+        }
+    }
+
+    /**
+     * Calcula la raíz cuadrada del número actual
+     */
+    private void calcularRaizCuadrada() {
+        // Verificamos que el número no sea negativo
+        // (Ejemplo: √(-9) -> Error)
+        if (numeroActual < 0) {
+            mostrarError("No se puede calcular raíz de número negativo");
+            return;
+        }
+        
+        // Calculamos la raíz y formateamos el resultado
+        // (Ejemplo: √(16) = 4)
+        numeroActual = Math.sqrt(numeroActual);
+        String resultado = formatearNumero(numeroActual);
+        
+        // Actualizamos los displays con la operación y resultado
+        // (Ejemplo: Display principal: "√(16)", Display secundario: "4")
+        historialOperaciones = new StringBuilder("√(" + jLabel3.getText() + ")");
+        jLabel1.setText(historialOperaciones.toString());
+        jLabel3.setText(resultado);
+        iniciarNuevoNumero = true;
+    }
+
+    /**
+     * Calcula el porcentaje en el contexto de la operación actual
+     */
+    private void calcularPorcentaje() {
+        // Solo calculamos porcentaje si hay una operación pendiente
+        // (Ejemplo: "200 + 50%" significa "200 + (200 * 50/100)")
+        if (!operacionPendiente.isEmpty()) {
+            // Calculamos el porcentaje del número en memoria
+            // (Ejemplo: 200 + 50% -> 200 + 100)
+            numeroActual = (numeroMemoria * numeroActual) / 100;
+            String resultado = formatearNumero(numeroActual);
+            
+            // Actualizamos los displays
+            jLabel3.setText(resultado);
+            jLabel1.setText(historialOperaciones.toString() + resultado);
+        }
+    }
+
+    /**
+     * Reinicia la calculadora a su estado inicial
+     */
+    private void limpiarCalculadora() {
+        // Reiniciamos todos los valores y displays
+        // (Ejemplo: Al presionar "C", todo vuelve a "0")
+        inicializarCalculadora();
+        // Restauramos el tamaño original de la fuente
+        jLabel1.setFont(jLabel1.getFont().deriveFont(fuenteOriginal));
+    }
+
+    /**
+     * Muestra un mensaje de error y reinicia la calculadora
+     * @param mensaje El mensaje de error a mostrar
+     */
+    private void mostrarError(String mensaje) {
+        // Mostramos un diálogo de error
+        // (Ejemplo: Al dividir por cero, muestra "No se puede dividir entre cero")
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            mensaje,
+            "Error",
+            javax.swing.JOptionPane.ERROR_MESSAGE
+        );
+        // Limpiamos la calculadora después del error
+        limpiarCalculadora();
+    }
+    
+    /**
+     * Cierra la calculadora y vuelve al menú principal
+     */
+    private void volverAlMenu() {
+        // Creamos y mostramos la ventana principal
+        IndexGigas indexGigas = new IndexGigas();
+        indexGigas.setVisible(true);
+        // Cerramos la ventana de la calculadora
+        this.dispose();
     }
 }
