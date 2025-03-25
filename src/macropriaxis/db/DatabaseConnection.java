@@ -14,7 +14,7 @@ public class DatabaseConnection {
     private static final String PASSWORD = "H4NZC0D3X";
     
     /*
-    private static final String DB_URL = "jdbc:mysql://192.168.10.102:3306/mi_base_datos";
+    private static final String DB_URL = "jdbc:mysql://192.168.10.102:3306/FAREWELL";
     private static final String USER = "MetaCodeX";
     private static final String PASSWORD = "H4NZC0D3X";
     */
