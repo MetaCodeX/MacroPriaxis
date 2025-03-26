@@ -18,6 +18,8 @@ import macropriaxis.serpent.serpent;
  * @author Carlo
  */
 public class IndexGigas extends javax.swing.JFrame {
+    private boolean label1Clicked = false;
+    private boolean label2Clicked = false;
 
     /**
      * Creates new form IndexGigas
@@ -26,12 +28,23 @@ public class IndexGigas extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     
- String imagePath = "/macropriaxis/media/kasane.gif"; // Ruta relativa al classpath
-macropriaxis.util.ImageLoader.setImageToLabel(jLabel1, imagePath);
- String image2Path = "/macropriaxis/media/kasane.gif"; // Ruta relativa al classpath
-macropriaxis.util.ImageLoader.setImageToLabel(jLabel2, image2Path);
+        String imagePath = "/macropriaxis/media/kasane.gif"; // Ruta relativa al classpath
+        macropriaxis.util.ImageLoader.setImageToLabel(jLabel1, imagePath);
+        String image2Path = "/macropriaxis/media/kasane.gif"; // Ruta relativa al classpath
+        macropriaxis.util.ImageLoader.setImageToLabel(jLabel2, image2Path);
 
+        // Agregar MouseListeners a los labels
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
     }
 
     /**
@@ -58,7 +71,6 @@ macropriaxis.util.ImageLoader.setImageToLabel(jLabel2, image2Path);
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MetacodeX Presents // MacroPriaxis");
@@ -147,13 +159,6 @@ macropriaxis.util.ImageLoader.setImageToLabel(jLabel2, image2Path);
             }
         });
 
-        jButton11.setText("Snake");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -173,9 +178,7 @@ macropriaxis.util.ImageLoader.setImageToLabel(jLabel2, image2Path);
                         .addComponent(jButton4)
                         .addGap(93, 93, 93))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                            .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(85, 85, 85)))
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -226,8 +229,6 @@ macropriaxis.util.ImageLoader.setImageToLabel(jLabel2, image2Path);
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)
@@ -314,11 +315,23 @@ macropriaxis.util.ImageLoader.setImageToLabel(jLabel2, image2Path);
         this.dispose();
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-      serpent serpente = new serpent();
-        serpente.setVisible(true);
-        this.dispose(); // Cierra la ventana actual
-    }//GEN-LAST:event_jButton11ActionPerformed
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        label1Clicked = true;
+        checkAndOpenGame();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        label2Clicked = true;
+        checkAndOpenGame();
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void checkAndOpenGame() {
+        if (label1Clicked && label2Clicked) {
+            serpent serpente = new serpent();
+            serpente.setVisible(true);
+            this.dispose();
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -358,7 +371,6 @@ macropriaxis.util.ImageLoader.setImageToLabel(jLabel2, image2Path);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

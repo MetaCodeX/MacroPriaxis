@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class serpent extends JFrame implements ActionListener, KeyListener {
-    private final int ANCHO = 600;
-    private final int ALTO = 600;
+    private final int ANCHO = 800;
+    private final int ALTO = 800;
     private final int UNIDAD_TAMANO = 20;
-    private final int DELAY = 80;
+    private int DELAY = 120;
     
     private final ArrayList<Integer> serpienteX = new ArrayList<>();
     private final ArrayList<Integer> serpienteY = new ArrayList<>();
@@ -85,7 +85,15 @@ public class serpent extends JFrame implements ActionListener, KeyListener {
             comidaX = random.nextInt((ANCHO/UNIDAD_TAMANO)-1) * UNIDAD_TAMANO;
             comidaY = random.nextInt((ALTO/UNIDAD_TAMANO)-1) * UNIDAD_TAMANO;
             
-            // Verificar que la comida no aparezca sobre la serpiente
+         
+            DELAY = random.nextInt(120) + 1;
+            
+          
+            if (timer != null) {
+                timer.setDelay(DELAY);
+            }
+            
+            
             ubicacionValida = true;
             for (int i = 0; i < serpienteX.size(); i++) {
                 if (serpienteX.get(i) == comidaX && serpienteY.get(i) == comidaY) {
@@ -234,7 +242,7 @@ public class serpent extends JFrame implements ActionListener, KeyListener {
                 if (!enJuego) iniciarJuego();
                 break;
             case KeyEvent.VK_P:
-                // Volver al menú principal
+            
                 IndexGigas menu = new IndexGigas();
                 menu.setVisible(true);
                 dispose();
