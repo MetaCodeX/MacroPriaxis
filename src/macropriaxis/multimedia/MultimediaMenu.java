@@ -18,6 +18,11 @@ public class MultimediaMenu extends javax.swing.JFrame {
     public MultimediaMenu() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        // Inicializar JavaFX en segundo plano
+        if (!JavaFXManager.isLaunched()) {
+            JavaFXManager.launchJavaFX();
+        }
     }
 
     /**
@@ -226,72 +231,72 @@ public class MultimediaMenu extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Práctica 11 - Despliegue de Etiqueta
-        new Thread(() -> {
-            javafx.application.Application.launch(macropriaxis.multimedia.practicas.Practica11_DespliegueEtiqueta.class);
-        }).start();
+        JavaFXManager.showPractice(() -> {
+            macropriaxis.multimedia.practicas.Practica11_DespliegueEtiqueta.ejecutar();
+        });
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // Práctica 12 - Despliegue de Imagen 1
-        new Thread(() -> {
-            javafx.application.Application.launch(macropriaxis.multimedia.practicas.Practica12_DespliegueImagen1.class);
-        }).start();
+        JavaFXManager.showPractice(() -> {
+            macropriaxis.multimedia.practicas.Practica12_DespliegueImagen1.ejecutar();
+        });
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // Práctica 13 - Despliegue de Imagen 2
-        new Thread(() -> {
-            javafx.application.Application.launch(macropriaxis.multimedia.practicas.Practica13_DespliegueImagen2.class);
-        }).start();
+        JavaFXManager.showPractice(() -> {
+            macropriaxis.multimedia.practicas.Practica13_DespliegueImagen2.ejecutar();
+        });
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // Práctica 14 - Despliegue de Imagen 3
-        new Thread(() -> {
-            javafx.application.Application.launch(macropriaxis.multimedia.practicas.Practica14_DespliegueImagen3.class);
-        }).start();
+        JavaFXManager.showPractice(() -> {
+            macropriaxis.multimedia.practicas.Practica14_DespliegueImagen3.ejecutar();
+        });
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // Práctica 15 - Despliegue de Imagen 4
-        new Thread(() -> {
-            javafx.application.Application.launch(macropriaxis.multimedia.practicas.Practica15_DespliegueImagen4.class);
-        }).start();
+        JavaFXManager.showPractice(() -> {
+            macropriaxis.multimedia.practicas.Practica15_DespliegueImagen4.ejecutar();
+        });
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // Práctica 16 - Despliegue de Imagen 5
-        new Thread(() -> {
-            javafx.application.Application.launch(macropriaxis.multimedia.practicas.Practica16_DespliegueImagen5.class);
-        }).start();
+        JavaFXManager.showPractice(() -> {
+            macropriaxis.multimedia.practicas.Practica16_DespliegueImagen5.ejecutar();
+        });
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // Práctica 17 - Despliegue de Imagen 6
-        new Thread(() -> {
-            javafx.application.Application.launch(macropriaxis.multimedia.practicas.Practica17_DespliegueImagen6.class);
-        }).start();
+        JavaFXManager.showPractice(() -> {
+            macropriaxis.multimedia.practicas.Practica17_DespliegueImagen6.ejecutar();
+        });
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // Práctica 18 - Captura Ancho Imagen
-        new Thread(() -> {
-            javafx.application.Application.launch(macropriaxis.multimedia.practicas.Practica18_CapturaAnchoImagen.class);
-        }).start();
+        JavaFXManager.showPractice(() -> {
+            macropriaxis.multimedia.practicas.Practica18_CapturaAnchoImagen.ejecutar();
+        });
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // Práctica 19 - Evento Teclado
-        new Thread(() -> {
-            javafx.application.Application.launch(macropriaxis.multimedia.practicas.Practica19_EventoTeclado.class);
-        }).start();
+        JavaFXManager.showPractice(() -> {
+            macropriaxis.multimedia.practicas.Practica19_EventoTeclado.ejecutar();
+        });
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // Práctica 20 - Evento Escenas
-        new Thread(() -> {
-            javafx.application.Application.launch(macropriaxis.multimedia.practicas.Practica20_EventoEscenas.class);
-        }).start();
+        JavaFXManager.showPractice(() -> {
+            macropriaxis.multimedia.practicas.Practica20_EventoEscenas.ejecutar();
+        });
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed

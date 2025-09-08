@@ -1,16 +1,17 @@
 package macropriaxis.multimedia.practicas;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Practica20_EventoEscenas extends Application {
+public class Practica20_EventoEscenas {
     
-    @Override
-    public void start(Stage escenario) {
+    public static void ejecutar() {
+        Stage stage = new Stage();
+        stage.setTitle("Práctica 20 - Eventos de Escena - Flechas");
+        
         Text texto = new Text();
         texto.setText("Texto original - Usa las flechas del teclado");
         VBox contenedor = new VBox(texto);
@@ -36,15 +37,10 @@ public class Practica20_EventoEscenas extends Application {
             }
         });
 
-        escenario.setTitle("Eventos de Escena - Flechas");
-        escenario.setScene(escena);
-        escenario.show();
+        stage.setScene(escena);
+        stage.show();
         
         // Solicitar foco para que detecte las teclas
         escena.getRoot().requestFocus();
-    }
-    
-    public static void main(String[] args) {
-        launch(args);
     }
 }

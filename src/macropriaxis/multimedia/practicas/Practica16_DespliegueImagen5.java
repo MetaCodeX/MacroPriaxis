@@ -1,6 +1,5 @@
 package macropriaxis.multimedia.practicas;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -8,15 +7,13 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import java.io.FileInputStream;
 
-public class Practica16_DespliegueImagen5 extends Application {
+public class Practica16_DespliegueImagen5 {
     
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("ImageView Experiment 1");
+    public static void ejecutar() {
+        Stage stage = new Stage();
+        stage.setTitle("Práctica 16 - Despliegue de Imagen 5");
         
-        // Usar una imagen por defecto desde resources en lugar de ruta local
         try {
-            // Intentar cargar imagen local, si no existe usar imagen por defecto
             Image image;
             try {
                 FileInputStream input = new FileInputStream("src/macropriaxis/media/kasane.gif");
@@ -29,14 +26,10 @@ public class Practica16_DespliegueImagen5 extends Application {
             ImageView imageView = new ImageView(image);
             HBox hbox = new HBox(imageView);
             Scene scene = new Scene(hbox, 400, 300);
-            primaryStage.setScene(scene);
-            primaryStage.show();
+            stage.setScene(scene);
+            stage.show();
         } catch (Exception e) {
             System.out.println("Error cargando imagen: " + e.getMessage());
         }
-    }
-    
-    public static void main(String[] args) {
-        launch(args);
     }
 }

@@ -1,17 +1,16 @@
 package macropriaxis.multimedia.practicas;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class Practica14_DespliegueImagen3 extends Application {
+public class Practica14_DespliegueImagen3 {
     
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Despliegue de imagen 3");
+    public static void ejecutar() {
+        Stage stage = new Stage();
+        stage.setTitle("Práctica 14 - Despliegue de imagen 3");
 
         Image image = new Image("https://www.uv.mx/dgdaie/files/2013/08/zlogosimbolo_color.jpg", 100, 100, false, false);
         ImageView imageView = new ImageView(image);
@@ -19,11 +18,7 @@ public class Practica14_DespliegueImagen3 extends Application {
         HBox hbox = new HBox(imageView);
 
         Scene scene = new Scene(hbox, 400, 200);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-    
-    public static void main(String[] args) {
-        launch(args);
+        stage.setScene(scene);
+        stage.show();
     }
 }

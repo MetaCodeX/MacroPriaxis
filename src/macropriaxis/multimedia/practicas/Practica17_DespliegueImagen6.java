@@ -1,6 +1,5 @@
 package macropriaxis.multimedia.practicas;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -8,13 +7,12 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import java.io.FileInputStream;
 
-public class Practica17_DespliegueImagen6 extends Application {
+public class Practica17_DespliegueImagen6 {
     
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Despliegue de imagen 6");
+    public static void ejecutar() {
+        Stage stage = new Stage();
+        stage.setTitle("Práctica 17 - Despliegue de imagen 6");
 
-        // Usar una imagen por defecto desde resources en lugar de ruta local
         try {
             Image image;
             try {
@@ -28,14 +26,10 @@ public class Practica17_DespliegueImagen6 extends Application {
             ImageView imageView = new ImageView(image);
             HBox hbox = new HBox(imageView);
             Scene scene = new Scene(hbox, 400, 200);
-            primaryStage.setScene(scene);
-            primaryStage.show();
+            stage.setScene(scene);
+            stage.show();
         } catch (Exception e) {
             System.out.println("Error cargando imagen: " + e.getMessage());
         }
-    }
-    
-    public static void main(String[] args) {
-        launch(args);
     }
 }
