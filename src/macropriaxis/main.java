@@ -28,9 +28,9 @@ public class main {
                 progressTimer.stop();
                 splash.dispose();
                 
-                // Mostrar la ventana principal
+                // Mostrar la ventana de login/register
                 java.awt.EventQueue.invokeLater(() -> {
-                    new IndexGigas().setVisible(true);
+                    new macropriaxis.gui.LoginRegister().setVisible(true);
                 });
             }
         });

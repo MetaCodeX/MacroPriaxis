@@ -13,6 +13,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.JOptionPane;
+import macropriaxis.db.SesionActual;
+import macropriaxis.db.Usuario;
 
 
 /**
@@ -97,6 +99,40 @@ public class Agenda0903 extends javax.swing.JFrame {
                 }
             }
         });
+
+        // Agregar botones y campo de búsqueda
+        jButtonModificar = new javax.swing.JButton("Modificar");
+        jButtonEliminar = new javax.swing.JButton("Eliminar");
+        jButtonBuscar = new javax.swing.JButton("Buscar");
+        jTextFieldBuscar = new javax.swing.JTextField(15);
+        // Añadir listeners
+        jButtonModificar.addActionListener(evt -> modificarAgenda());
+        jButtonEliminar.addActionListener(evt -> eliminarAgenda());
+        jButtonBuscar.addActionListener(evt -> buscarAgenda());
+        // Añadir a la interfaz (al panel principal)
+        jPanel1.add(jButtonModificar);
+        jPanel1.add(jButtonEliminar);
+        jPanel1.add(jTextFieldBuscar);
+        jPanel1.add(jButtonBuscar);
+        // Permitir seleccionar fila para editar
+        jTable1.getSelectionModel().addListSelectionListener(e -> cargarDatosSeleccionados());
+
+        // Mostrar el nombre del usuario logueado
+        jLabelUsuario = new javax.swing.JLabel();
+        Usuario usuario = SesionActual.getUsuario();
+        if (usuario != null) {
+            jLabelUsuario.setText("Usuario: " + usuario.getNombre() + " " + usuario.getApellidos());
+        } else {
+            jLabelUsuario.setText("Usuario: -");
+        }
+        jLabelUsuario.setFont(new java.awt.Font("Consolas", 1, 16));
+        jLabelUsuario.setForeground(new java.awt.Color(255,255,255));
+        jPanel1.add(jLabelUsuario);
+        // Mejorar disposición de botones y campos
+        jButton1.setToolTipText("Añadir nueva anotación");
+        jButtonModificar.setToolTipText("Modificar la anotación seleccionada");
+        jButtonEliminar.setToolTipText("Eliminar la anotación seleccionada");
+        jButtonBuscar.setToolTipText("Buscar por asunto");
     }
 
     /**
@@ -330,6 +366,11 @@ public class Agenda0903 extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JButton jButtonModificar;
+    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonBuscar;
+    private javax.swing.JTextField jTextFieldBuscar;
+    private javax.swing.JLabel jLabelUsuario;
     // End of variables declaration//GEN-END:variables
 
     private void configurarTabla() {
@@ -341,23 +382,23 @@ public class Agenda0903 extends javax.swing.JFrame {
     
     private void actualizarTabla() {
         try {
-            // Obtiene todas las entradas de agenda desde la base de datos
-            List<Agenda> agendas = AgendaDAO.obtenerTodasLasAgendas();
-            // Obtiene el modelo de la tabla para modificarlo
+            Usuario usuario = SesionActual.getUsuario();
+            if (usuario == null) {
+                JOptionPane.showMessageDialog(this, "No hay usuario logueado");
+                return;
+            }
+            // Obtiene solo las agendas del usuario logueado
+            List<Agenda> agendas = AgendaDAO.obtenerAgendasPorUsuario(usuario.getId());
             DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-            // Limpia todas las filas existentes
             modelo.setRowCount(0);
-            
-            // Itera sobre cada entrada de agenda y la añade a la tabla
             for (Agenda agenda : agendas) {
                 modelo.addRow(new Object[]{
-                    agenda.getAsunto(),                    // Primera columna: Asunto
-                    new SimpleDateFormat("dd-MM-yyyy").format(agenda.getFecha()),  // Segunda columna: Fecha
-                    new SimpleDateFormat("HH:mm").format(agenda.getHora())        // Tercera columna: Hora
+                    agenda.getAsunto(),
+                    new SimpleDateFormat("dd-MM-yyyy").format(agenda.getFecha()),
+                    new SimpleDateFormat("HH:mm").format(agenda.getHora())
                 });
             }
         } catch (Exception e) {
-            // Muestra un mensaje de error si hay problemas al cargar los datos
             JOptionPane.showMessageDialog(this, "Error al cargar las agendas: " + e.getMessage());
         }
     }
@@ -371,53 +412,131 @@ public class Agenda0903 extends javax.swing.JFrame {
     }
     
     private void guardarAgenda() {
-        // Validar que ningún campo esté vacío
         if (jTextField1.getText().trim().isEmpty() || 
             jTextField2.getText().trim().isEmpty() || 
             jTextField3.getText().trim().isEmpty() || 
             jTextArea1.getText().trim().isEmpty()) {
-            // Muestra mensaje de error si algún campo está vacío
             JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios");
             return;
         }
-        
         try {
-            // Procesa y valida el formato de la fecha (dd/MM/yyyy)
             String fechaStr = jTextField2.getText().trim().replace("-", "/");
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            dateFormat.setLenient(false); // No permite fechas inválidas
+            dateFormat.setLenient(false);
             java.util.Date utilDate = dateFormat.parse(fechaStr);
             Date sqlDate = new Date(utilDate.getTime());
-            
-            // Procesa y valida el formato de la hora (HH:mm)
             String horaStr = jTextField3.getText().trim();
             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-            timeFormat.setLenient(false); // No permite horas inválidas
+            timeFormat.setLenient(false);
             java.util.Date utilTime = timeFormat.parse(horaStr);
             Time sqlTime = new Time(utilTime.getTime());
-            
-            // Guarda la nueva entrada en la base de datos
+            Usuario usuario = SesionActual.getUsuario();
+            if (usuario == null) {
+                JOptionPane.showMessageDialog(this, "No hay usuario logueado");
+                return;
+            }
+            // Guardar la nueva entrada con el usuario_id
             AgendaDAO.insertarAgenda(
-                jTextField1.getText().trim(), // Asunto
-                sqlDate,                      // Fecha convertida
-                sqlTime,                      // Hora convertida
-                jTextArea1.getText().trim()   // Anotaciones
+                usuario.getId(),
+                jTextField1.getText().trim(),
+                sqlDate,
+                sqlTime,
+                jTextArea1.getText().trim()
             );
-            
-            // Limpia los campos después de guardar
             limpiarCampos();
-            // Actualiza la tabla con la nueva entrada
             actualizarTabla();
-            
-            // Muestra mensaje de éxito
-            JOptionPane.showMessageDialog(this, "Agenda guardada exitosamente");
-            
         } catch (ParseException e) {
-            // Muestra error si el formato de fecha u hora es incorrecto
-            JOptionPane.showMessageDialog(this, "Error en el formato de fecha u hora: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Formato de fecha u hora incorrecto");
         } catch (Exception e) {
-            // Muestra error si hay problemas al guardar en la base de datos
             JOptionPane.showMessageDialog(this, "Error al guardar la agenda: " + e.getMessage());
+        }
+    }
+
+    // Guardar el ID de la agenda seleccionada
+    private Integer agendaSeleccionadaId = null;
+
+    private void cargarDatosSeleccionados() {
+        int row = jTable1.getSelectedRow();
+        if (row != -1) {
+            try {
+                Usuario usuario = SesionActual.getUsuario();
+                if (usuario == null) return;
+                List<Agenda> agendas = AgendaDAO.obtenerAgendasPorUsuario(usuario.getId());
+                Agenda ag = agendas.get(row);
+                agendaSeleccionadaId = ag.getId();
+                jTextField1.setText(ag.getAsunto());
+                jTextField2.setText(new SimpleDateFormat("dd/MM/yyyy").format(ag.getFecha()));
+                jTextField3.setText(new SimpleDateFormat("HH:mm").format(ag.getHora()));
+                jTextArea1.setText(ag.getAnotaciones());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Error al cargar datos: " + ex.getMessage());
+            }
+        }
+    }
+
+    private void modificarAgenda() {
+        if (agendaSeleccionadaId == null) {
+            JOptionPane.showMessageDialog(this, "Selecciona una anotación para modificar");
+            return;
+        }
+        try {
+            String fechaStr = jTextField2.getText().trim().replace("-", "/");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            dateFormat.setLenient(false);
+            java.util.Date utilDate = dateFormat.parse(fechaStr);
+            Date sqlDate = new Date(utilDate.getTime());
+            String horaStr = jTextField3.getText().trim();
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+            timeFormat.setLenient(false);
+            java.util.Date utilTime = timeFormat.parse(horaStr);
+            Time sqlTime = new Time(utilTime.getTime());
+            Usuario usuario = SesionActual.getUsuario();
+            if (usuario == null) return;
+            AgendaDAO.modificarAgenda(agendaSeleccionadaId, usuario.getId(), jTextField1.getText().trim(), sqlDate, sqlTime, jTextArea1.getText().trim());
+            limpiarCampos();
+            actualizarTabla();
+            agendaSeleccionadaId = null;
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(this, "Formato de fecha u hora incorrecto");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al modificar la agenda: " + e.getMessage());
+        }
+    }
+
+    private void eliminarAgenda() {
+        if (agendaSeleccionadaId == null) {
+            JOptionPane.showMessageDialog(this, "Selecciona una anotación para eliminar");
+            return;
+        }
+        try {
+            AgendaDAO.eliminarAgenda(agendaSeleccionadaId);
+            limpiarCampos();
+            actualizarTabla();
+            agendaSeleccionadaId = null;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al eliminar la agenda: " + e.getMessage());
+        }
+    }
+
+    private void buscarAgenda() {
+        String texto = jTextFieldBuscar.getText().trim();
+        try {
+            Usuario usuario = SesionActual.getUsuario();
+            if (usuario == null) return;
+            List<Agenda> agendas = AgendaDAO.obtenerAgendasPorUsuario(usuario.getId());
+            DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+            modelo.setRowCount(0);
+            for (Agenda agenda : agendas) {
+                if (agenda.getAsunto().toLowerCase().contains(texto.toLowerCase())) {
+                    modelo.addRow(new Object[]{
+                        agenda.getAsunto(),
+                        new SimpleDateFormat("dd-MM-yyyy").format(agenda.getFecha()),
+                        new SimpleDateFormat("HH:mm").format(agenda.getHora())
+                    });
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al buscar: " + e.getMessage());
         }
     }
 }

@@ -131,12 +131,18 @@ public class frame27 extends javax.swing.JFrame {
             
             if (numero == 999) {
                 calc27 resultados = new calc27();
+                // Calcular cantidad, mayor, menor y orden ascendente
+                int cantidad = numeros.size();
+                int mayor = numeros.isEmpty() ? 0 : java.util.Collections.max(numeros);
+                int menor = numeros.isEmpty() ? 0 : java.util.Collections.min(numeros);
+                java.util.List<Integer> ordenados = new java.util.ArrayList<>(numeros);
+                java.util.Collections.sort(ordenados);
                 StringBuilder sb = new StringBuilder();
                 for (Integer num : numeros) {
                     sb.append(num).append("\n");
                 }
-                resultados.setNumeros(sb.toString());
-                resultados.setSumas(sumaPares, sumaImpares);
+                // Enviar todos los datos a la ventana de resultados
+                resultados.setResultados(sb.toString(), cantidad, mayor, menor, ordenados);
                 resultados.setVisible(true);
                 this.dispose();
             } else {

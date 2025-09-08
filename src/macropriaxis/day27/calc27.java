@@ -4,7 +4,7 @@
  */
 package macropriaxis.day27;
 
-
+import java.util.List;
 
 /**
  *
@@ -30,6 +30,22 @@ public class calc27 extends javax.swing.JFrame {
     public void setSumas(int pares, int impares) {
         jLabel5.setText(String.valueOf(pares));
         jLabel3.setText(String.valueOf(impares));
+    }
+
+    // NUEVO: Método para mostrar todos los resultados requeridos
+    public void setResultados(String numeros, int cantidad, int mayor, int menor, java.util.List<Integer> ordenados) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Números ingresados:\n").append(numeros).append("\n");
+        sb.append("Cantidad: ").append(cantidad).append("\n");
+        sb.append("Mayor: ").append(mayor).append("\n");
+        sb.append("Menor: ").append(menor).append("\n");
+        sb.append("Orden ascendente: ");
+        for (int i = 0; i < ordenados.size(); i++) {
+            sb.append(ordenados.get(i));
+            if (i < ordenados.size() - 1) sb.append(", ");
+        }
+        sb.append("\n");
+        jTextArea1.setText(sb.toString());
     }
 
    
