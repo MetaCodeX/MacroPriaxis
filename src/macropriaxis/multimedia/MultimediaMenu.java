@@ -47,6 +47,15 @@ public class MultimediaMenu extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
+        jButtonP1 = new javax.swing.JButton();
+        jButtonP2 = new javax.swing.JButton();
+        jButtonP3 = new javax.swing.JButton();
+        jButtonP4 = new javax.swing.JButton();
+        jButtonP5 = new javax.swing.JButton();
+        jButtonP6 = new javax.swing.JButton();
+        jButtonP7 = new javax.swing.JButton();
+        jButtonP8 = new javax.swing.JButton();
+        jButtonP9 = new javax.swing.JButton();
         jButtonVolver = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
 
@@ -61,7 +70,7 @@ public class MultimediaMenu extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Prácticas de JavaFX");
+        jLabel2.setText("Prácticas de JavaFX (1-9 y 11-20)");
 
         jButton1.setText("Práctica 11 - Despliegue de Etiqueta");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -147,6 +156,69 @@ public class MultimediaMenu extends javax.swing.JFrame {
             }
         });
 
+        jButtonP1.setText("Práctica 1 - Código Base JavaFX");
+        jButtonP1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonP1ActionPerformed(evt);
+            }
+        });
+
+        jButtonP2.setText("Práctica 2 - Un Escenario");
+        jButtonP2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonP2ActionPerformed(evt);
+            }
+        });
+
+        jButtonP3.setText("Práctica 3 - Dos Escenarios");
+        jButtonP3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonP3ActionPerformed(evt);
+            }
+        });
+
+        jButtonP4.setText("Práctica 4 - Dimensiones de Escenario");
+        jButtonP4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonP4ActionPerformed(evt);
+            }
+        });
+
+        jButtonP5.setText("Práctica 5 - Escenario Simple");
+        jButtonP5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonP5ActionPerformed(evt);
+            }
+        });
+
+        jButtonP6.setText("Práctica 6 - Estados del Escenario");
+        jButtonP6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonP6ActionPerformed(evt);
+            }
+        });
+
+        jButtonP7.setText("Práctica 7 - Escena Vacía");
+        jButtonP7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonP7ActionPerformed(evt);
+            }
+        });
+
+        jButtonP8.setText("Práctica 8 - Cambiando el Cursor");
+        jButtonP8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonP8ActionPerformed(evt);
+            }
+        });
+
+        jButtonP9.setText("Práctica 9 - Cambio de Escena");
+        jButtonP9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonP9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -156,30 +228,41 @@ public class MultimediaMenu extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                            .addComponent(jButtonP1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(jButtonP2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonP3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonP4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonP5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonP6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonP7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonP8, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(jButtonP9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                             .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
+                        .addGap(200, 200, 200)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(230, 230, 230)
+                        .addGap(280, 280, 280)
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(180, 180, 180)
+                        .addGap(220, 220, 220)
                         .addComponent(jButtonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,27 +271,40 @@ public class MultimediaMenu extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addGap(30, 30, 30)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(jButtonP1)
+                    .addComponent(jButtonP8)
                     .addComponent(jButton6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(jButtonP2)
+                    .addComponent(jButtonP9)
                     .addComponent(jButton7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                    .addComponent(jButtonP3)
+                    .addComponent(jButton1)
                     .addComponent(jButton8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
+                    .addComponent(jButtonP4)
+                    .addComponent(jButton2)
                     .addComponent(jButton9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
+                    .addComponent(jButtonP5)
+                    .addComponent(jButton3)
                     .addComponent(jButton10))
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonP6)
+                    .addComponent(jButton4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonP7)
+                    .addComponent(jButton5))
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonVolver)
                     .addComponent(jButtonSalir))
@@ -310,6 +406,69 @@ public class MultimediaMenu extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
+    private void jButtonP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonP1ActionPerformed
+        // Práctica 1 - Código Base JavaFX
+        JavaFXManager.showPractice(() -> {
+            macropriaxis.multimedia.practicas.Practica01_CodigoBase.ejecutar();
+        });
+    }//GEN-LAST:event_jButtonP1ActionPerformed
+
+    private void jButtonP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonP2ActionPerformed
+        // Práctica 2 - Un Escenario
+        JavaFXManager.showPractice(() -> {
+            macropriaxis.multimedia.practicas.Practica02_UnEscenario.ejecutar();
+        });
+    }//GEN-LAST:event_jButtonP2ActionPerformed
+
+    private void jButtonP3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonP3ActionPerformed
+        // Práctica 3 - Dos Escenarios
+        JavaFXManager.showPractice(() -> {
+            macropriaxis.multimedia.practicas.Practica03_DosEscenarios.ejecutar();
+        });
+    }//GEN-LAST:event_jButtonP3ActionPerformed
+
+    private void jButtonP4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonP4ActionPerformed
+        // Práctica 4 - Dimensiones de Escenario
+        JavaFXManager.showPractice(() -> {
+            macropriaxis.multimedia.practicas.Practica04_DimensionesEscenario.ejecutar();
+        });
+    }//GEN-LAST:event_jButtonP4ActionPerformed
+
+    private void jButtonP5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonP5ActionPerformed
+        // Práctica 5 - Escenario Simple
+        JavaFXManager.showPractice(() -> {
+            macropriaxis.multimedia.practicas.Practica05_EscenarioSimple.ejecutar();
+        });
+    }//GEN-LAST:event_jButtonP5ActionPerformed
+
+    private void jButtonP6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonP6ActionPerformed
+        // Práctica 6 - Estados del Escenario
+        JavaFXManager.showPractice(() -> {
+            macropriaxis.multimedia.practicas.Practica06_EstadosEscenario.ejecutar();
+        });
+    }//GEN-LAST:event_jButtonP6ActionPerformed
+
+    private void jButtonP7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonP7ActionPerformed
+        // Práctica 7 - Escena Vacía
+        JavaFXManager.showPractice(() -> {
+            macropriaxis.multimedia.practicas.Practica07_EscenaVacia.ejecutar();
+        });
+    }//GEN-LAST:event_jButtonP7ActionPerformed
+
+    private void jButtonP8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonP8ActionPerformed
+        // Práctica 8 - Cambiando el Cursor
+        JavaFXManager.showPractice(() -> {
+            macropriaxis.multimedia.practicas.Practica08_CambiandoCursor.ejecutar();
+        });
+    }//GEN-LAST:event_jButtonP8ActionPerformed
+
+    private void jButtonP9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonP9ActionPerformed
+        // Práctica 9 - Cambio de Escena
+        JavaFXManager.showPractice(() -> {
+            macropriaxis.multimedia.practicas.Practica09_CambioEscena.ejecutar();
+        });
+    }//GEN-LAST:event_jButtonP9ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -356,6 +515,15 @@ public class MultimediaMenu extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JButton jButtonP1;
+    private javax.swing.JButton jButtonP2;
+    private javax.swing.JButton jButtonP3;
+    private javax.swing.JButton jButtonP4;
+    private javax.swing.JButton jButtonP5;
+    private javax.swing.JButton jButtonP6;
+    private javax.swing.JButton jButtonP7;
+    private javax.swing.JButton jButtonP8;
+    private javax.swing.JButton jButtonP9;
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JButton jButtonVolver;
     private javax.swing.JLabel jLabel1;
