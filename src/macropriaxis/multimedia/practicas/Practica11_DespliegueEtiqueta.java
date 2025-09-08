@@ -1,5 +1,6 @@
 package macropriaxis.multimedia.practicas;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -15,6 +16,7 @@ public class Practica11_DespliegueEtiqueta {
         etiqueta.setText("Etiqueta de texto");
 
         HBox hbox = new HBox(etiqueta);
+        hbox.setAlignment(Pos.CENTER); // Centrar el contenido
 
         Scene scene = new Scene(hbox, 300, 150);
         stage.setScene(scene);
