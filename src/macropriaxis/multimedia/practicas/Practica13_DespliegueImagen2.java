@@ -10,7 +10,7 @@ public class Practica13_DespliegueImagen2 {
     
     public static void ejecutar() {
         Stage stage = new Stage();
-        stage.setTitle("Práctica 13 - Despliegue de imagen 2");
+        stage.setTitle("Práctica 13 - Despliegue de imagen 2 - Carlos Eduardo Juarez Ricardo - 09/09/2025");
 
         Image image = new Image("https://www.uv.mx/veracruz/nutricion/files/2021/04/Flor_con_uv_sin_fondo.png", true);
         ImageView imageView = new ImageView(image);

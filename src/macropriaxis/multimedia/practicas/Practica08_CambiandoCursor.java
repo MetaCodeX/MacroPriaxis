@@ -20,7 +20,7 @@ public class Practica08_CambiandoCursor {
         Scene escena = new Scene(contenedor, 500, 300);
         escena.setCursor(Cursor.OPEN_HAND);
         
-        escenario.setTitle("Práctica 8 - Escenario principal");
+        escenario.setTitle("Práctica 8 - Escenario principal - Carlos Eduardo Juarez Ricardo - 09/09/2025");
         escenario.setScene(escena);
         escenario.show();
     }

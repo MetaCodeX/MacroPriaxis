@@ -11,7 +11,7 @@ public class Practica18_CapturaAnchoImagen {
     
     public static void ejecutar() {
         Stage stage = new Stage();
-        stage.setTitle("Práctica 18 - Captura Ancho de Imagen");
+        stage.setTitle("Práctica 18 - Captura Ancho de Imagen - Carlos Eduardo Juarez Ricardo - 09/09/2025");
 
         Image image = new Image("https://www.uv.mx/veracruz/nutricion/files/2021/04/Flor_con_uv_sin_fondo.png", 300, 300, true, true, true);
         ImageView imageView = new ImageView(image);

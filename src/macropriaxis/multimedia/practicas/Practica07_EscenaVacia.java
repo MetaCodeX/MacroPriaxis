@@ -18,7 +18,7 @@ public class Practica07_EscenaVacia {
         
         Scene escena = new Scene(contenedor, 500, 300);
         
-        escenario.setTitle("Práctica 7 - Escenario principal");
+        escenario.setTitle("Práctica 7 - Escenario principal - Carlos Eduardo Juarez Ricardo - 09/09/2025");
         escenario.setScene(escena);
         escenario.show();
     }

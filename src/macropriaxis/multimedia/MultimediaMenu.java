@@ -19,9 +19,26 @@ public class MultimediaMenu extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         
-        // Inicializar JavaFX en segundo plano
-        if (!JavaFXManager.isLaunched()) {
-            JavaFXManager.launchJavaFX();
+        // Inicializar JavaFX en segundo plano con manejo de errores
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                JavaFXManager.initializeJavaFX();
+                
+                // Verificar si hubo errores en la inicialización
+                if (!JavaFXManager.isAvailable()) {
+                    javax.swing.JOptionPane.showMessageDialog(this, 
+                        "Error al inicializar JavaFX. Algunas prácticas pueden no funcionar correctamente.\n" +
+                        "Use el botón 'Limpiar Sistema' si hay problemas.", 
+                        "Advertencia", 
+                        javax.swing.JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al inicializar el sistema multimedia: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en MultimediaMenu constructor: " + e.getMessage());
         }
     }
 
@@ -58,6 +75,7 @@ public class MultimediaMenu extends javax.swing.JFrame {
         jButtonP9 = new javax.swing.JButton();
         jButtonVolver = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
+        jButtonLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Multimedia Dr.Cristobal - JavaFX Prácticas");
@@ -153,6 +171,15 @@ public class MultimediaMenu extends javax.swing.JFrame {
         jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSalirActionPerformed(evt);
+            }
+        });
+
+        jButtonLimpiar.setText("Limpiar Sistema");
+        jButtonLimpiar.setBackground(new java.awt.Color(255, 150, 150));
+        jButtonLimpiar.setForeground(java.awt.Color.BLACK);
+        jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimpiarActionPerformed(evt);
             }
         });
 
@@ -258,8 +285,10 @@ public class MultimediaMenu extends javax.swing.JFrame {
                         .addGap(280, 280, 280)
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(220, 220, 220)
-                        .addComponent(jButtonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(150, 150, 150)
+                        .addComponent(jButtonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -307,6 +336,7 @@ public class MultimediaMenu extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonVolver)
+                    .addComponent(jButtonLimpiar)
                     .addComponent(jButtonSalir))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -327,72 +357,232 @@ public class MultimediaMenu extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Práctica 11 - Despliegue de Etiqueta
-        JavaFXManager.showPractice(() -> {
-            macropriaxis.multimedia.practicas.Practica11_DespliegueEtiqueta.ejecutar();
-        });
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica11_DespliegueEtiqueta.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 11: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 11: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // Práctica 12 - Despliegue de Imagen 1
-        JavaFXManager.showPractice(() -> {
-            macropriaxis.multimedia.practicas.Practica12_DespliegueImagen1.ejecutar();
-        });
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica12_DespliegueImagen1.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 12: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 12: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // Práctica 13 - Despliegue de Imagen 2
-        JavaFXManager.showPractice(() -> {
-            macropriaxis.multimedia.practicas.Practica13_DespliegueImagen2.ejecutar();
-        });
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica13_DespliegueImagen2.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 13: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 13: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // Práctica 14 - Despliegue de Imagen 3
-        JavaFXManager.showPractice(() -> {
-            macropriaxis.multimedia.practicas.Practica14_DespliegueImagen3.ejecutar();
-        });
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica14_DespliegueImagen3.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 14: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 14: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // Práctica 15 - Despliegue de Imagen 4
-        JavaFXManager.showPractice(() -> {
-            macropriaxis.multimedia.practicas.Practica15_DespliegueImagen4.ejecutar();
-        });
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica15_DespliegueImagen4.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 15: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 15: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // Práctica 16 - Despliegue de Imagen 5
-        JavaFXManager.showPractice(() -> {
-            macropriaxis.multimedia.practicas.Practica16_DespliegueImagen5.ejecutar();
-        });
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica16_DespliegueImagen5.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 16: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 16: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // Práctica 17 - Despliegue de Imagen 6
-        JavaFXManager.showPractice(() -> {
-            macropriaxis.multimedia.practicas.Practica17_DespliegueImagen6.ejecutar();
-        });
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica17_DespliegueImagen6.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 17: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 17: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // Práctica 18 - Captura Ancho Imagen
-        JavaFXManager.showPractice(() -> {
-            macropriaxis.multimedia.practicas.Practica18_CapturaAnchoImagen.ejecutar();
-        });
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica18_CapturaAnchoImagen.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 18: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 18: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // Práctica 19 - Evento Teclado
-        JavaFXManager.showPractice(() -> {
-            macropriaxis.multimedia.practicas.Practica19_EventoTeclado.ejecutar();
-        });
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica19_EventoTeclado.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 19: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 19: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // Práctica 20 - Evento Escenas
-        JavaFXManager.showPractice(() -> {
-            macropriaxis.multimedia.practicas.Practica20_EventoEscenas.ejecutar();
-        });
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica20_EventoEscenas.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 20: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 20: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
@@ -406,67 +596,261 @@ public class MultimediaMenu extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
+    private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
+        try {
+            int confirmacion = javax.swing.JOptionPane.showConfirmDialog(this, 
+                "¿Está seguro de que desea limpiar el sistema multimedia?\n" +
+                "Esto cerrará todas las prácticas abiertas y reiniciará JavaFX.", 
+                "Confirmar Limpieza", 
+                javax.swing.JOptionPane.YES_NO_OPTION,
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+            
+            if (confirmacion == javax.swing.JOptionPane.YES_OPTION) {
+                // Mostrar mensaje de progreso
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Limpiando sistema multimedia...", 
+                    "Limpieza en Progreso", 
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                
+                // Resetear el sistema JavaFX
+                macropriaxis.multimedia.JavaFXManager.reset();
+                
+                // Esperar un poco para que se complete el reset
+                Thread.sleep(1000);
+                
+                // Reinicializar JavaFX
+                macropriaxis.multimedia.JavaFXManager.initializeJavaFX();
+                
+                // Verificar que se inicializó correctamente
+                if (macropriaxis.multimedia.JavaFXManager.isAvailable()) {
+                    javax.swing.JOptionPane.showMessageDialog(this, 
+                        "Sistema multimedia limpiado y reiniciado correctamente.\n" +
+                        "Ahora puede ejecutar las prácticas normalmente.", 
+                        "Limpieza Completada", 
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, 
+                        "Sistema limpiado pero JavaFX no se pudo reinicializar.\n" +
+                        "Intente reiniciar la aplicación completa.", 
+                        "Advertencia", 
+                        javax.swing.JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al limpiar el sistema: " + e.getMessage() + "\n" +
+                "Se recomienda reiniciar la aplicación completa.", 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en limpieza del sistema: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButtonLimpiarActionPerformed
+
     private void jButtonP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonP1ActionPerformed
         // Práctica 1 - Código Base JavaFX
-        JavaFXManager.showPractice(() -> {
-            macropriaxis.multimedia.practicas.Practica01_CodigoBase.ejecutar();
-        });
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica01_CodigoBase.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 1: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 1: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButtonP1ActionPerformed
 
     private void jButtonP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonP2ActionPerformed
         // Práctica 2 - Un Escenario
-        JavaFXManager.showPractice(() -> {
-            macropriaxis.multimedia.practicas.Practica02_UnEscenario.ejecutar();
-        });
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica02_UnEscenario.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 2: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 2: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButtonP2ActionPerformed
 
     private void jButtonP3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonP3ActionPerformed
         // Práctica 3 - Dos Escenarios
-        JavaFXManager.showPractice(() -> {
-            macropriaxis.multimedia.practicas.Practica03_DosEscenarios.ejecutar();
-        });
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica03_DosEscenarios.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 3: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 3: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButtonP3ActionPerformed
 
     private void jButtonP4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonP4ActionPerformed
         // Práctica 4 - Dimensiones de Escenario
-        JavaFXManager.showPractice(() -> {
-            macropriaxis.multimedia.practicas.Practica04_DimensionesEscenario.ejecutar();
-        });
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica04_DimensionesEscenario.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 4: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 4: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButtonP4ActionPerformed
 
     private void jButtonP5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonP5ActionPerformed
         // Práctica 5 - Escenario Simple
-        JavaFXManager.showPractice(() -> {
-            macropriaxis.multimedia.practicas.Practica05_EscenarioSimple.ejecutar();
-        });
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica05_EscenarioSimple.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 5: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 5: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButtonP5ActionPerformed
 
     private void jButtonP6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonP6ActionPerformed
         // Práctica 6 - Estados del Escenario
-        JavaFXManager.showPractice(() -> {
-            macropriaxis.multimedia.practicas.Practica06_EstadosEscenario.ejecutar();
-        });
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica06_EstadosEscenario.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 6: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 6: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButtonP6ActionPerformed
 
     private void jButtonP7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonP7ActionPerformed
         // Práctica 7 - Escena Vacía
-        JavaFXManager.showPractice(() -> {
-            macropriaxis.multimedia.practicas.Practica07_EscenaVacia.ejecutar();
-        });
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica07_EscenaVacia.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 7: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 7: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButtonP7ActionPerformed
 
     private void jButtonP8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonP8ActionPerformed
         // Práctica 8 - Cambiando el Cursor
-        JavaFXManager.showPractice(() -> {
-            macropriaxis.multimedia.practicas.Practica08_CambiandoCursor.ejecutar();
-        });
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica08_CambiandoCursor.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 8: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 8: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButtonP8ActionPerformed
 
     private void jButtonP9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonP9ActionPerformed
         // Práctica 9 - Cambio de Escena
-        JavaFXManager.showPractice(() -> {
-            macropriaxis.multimedia.practicas.Practica09_CambioEscena.ejecutar();
-        });
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica09_CambioEscena.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 9: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 9: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButtonP9ActionPerformed
 
     /**
@@ -524,6 +908,7 @@ public class MultimediaMenu extends javax.swing.JFrame {
     private javax.swing.JButton jButtonP7;
     private javax.swing.JButton jButtonP8;
     private javax.swing.JButton jButtonP9;
+    private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JButton jButtonVolver;
     private javax.swing.JLabel jLabel1;

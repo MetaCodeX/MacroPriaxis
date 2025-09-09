@@ -6,7 +6,7 @@ public class Practica06_EstadosEscenario {
     
     public static void ejecutar() {
         Stage escenario = new Stage();
-        escenario.setTitle("Práctica 6 - Escenario principal");
+        escenario.setTitle("Práctica 6 - Escenario principal - Carlos Eduardo Juarez Ricardo - 09/09/2025");
         escenario.setWidth(500);
         escenario.setHeight(300);
         

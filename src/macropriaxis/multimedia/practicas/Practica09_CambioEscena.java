@@ -39,7 +39,7 @@ public class Practica09_CambioEscena {
         layout.getChildren().addAll(label1, button);
         layout2.getChildren().addAll(label2, button2, text);
 
-        escenario.setTitle("Práctica 9 - Programa Principal");
+        escenario.setTitle("Práctica 9 - Programa Principal - Carlos Eduardo Juarez Ricardo - 09/09/2025");
         escenario.setScene(scene);
         escenario.show();
     }

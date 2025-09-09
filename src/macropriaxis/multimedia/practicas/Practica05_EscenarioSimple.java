@@ -7,7 +7,7 @@ public class Practica05_EscenarioSimple {
     
     public static void ejecutar() {
         Stage escenario = new Stage();
-        escenario.setTitle("Práctica 5 - Escenario principal");
+        escenario.setTitle("Práctica 5 - Escenario principal - Carlos Eduardo Juarez Ricardo - 09/09/2025");
         
         // Cambiar entre diferentes estilos descomentando una línea
         //escenario.initStyle(StageStyle.DECORATED);     // Estilo por defecto

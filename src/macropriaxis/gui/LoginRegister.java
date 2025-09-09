@@ -15,6 +15,7 @@ public class LoginRegister extends JFrame {
     private JTextField txtEmailLogin;
     private JButton btnLogin;
     private JButton btnGoRegister;
+    private JButton btnGuest;
     private JLabel lblLoginMsg;
     // Register
     private JTextField txtNombre, txtApellidos, txtFechaNacimiento, txtCiudad, txtTelefono, txtDireccion, txtEmail, txtMatricula, txtCarrera;
@@ -80,11 +81,17 @@ public class LoginRegister extends JFrame {
         btnGoRegister.setForeground(Color.BLACK);
         panel.add(btnGoRegister, gbc);
         gbc.gridy++;
+        btnGuest = new JButton("Acceder como Invitado");
+        btnGuest.setBackground(new Color(255,200,100));
+        btnGuest.setForeground(Color.BLACK);
+        panel.add(btnGuest, gbc);
+        gbc.gridy++;
         lblLoginMsg = new JLabel("", SwingConstants.CENTER);
         lblLoginMsg.setForeground(Color.RED);
         panel.add(lblLoginMsg, gbc);
         btnLogin.addActionListener(e -> loginAction());
         btnGoRegister.addActionListener(e -> cardLayout.show(panelMain, "register"));
+        btnGuest.addActionListener(e -> guestLoginAction());
         return panel;
     }
 
@@ -203,5 +210,38 @@ public class LoginRegister extends JFrame {
                 lblRegisterMsg.setText("Error al registrar usuario");
             }
         }
+    }
+
+    private void guestLoginAction() {
+        // Crear un usuario invitado para acceso offline
+        Usuario usuarioInvitado = new Usuario(
+            "Invitado",
+            "Usuario",
+            "2024-01-01",
+            "Offline",
+            "N/A",
+            "N/A",
+            "invitado@offline.local",
+            "GUEST001",
+            "Acceso Temporal"
+        );
+        
+        // Establecer el usuario invitado en la sesión actual
+        macropriaxis.db.SesionActual.setUsuario(usuarioInvitado);
+        
+        // Mostrar mensaje de confirmación
+        lblLoginMsg.setForeground(Color.BLUE);
+        lblLoginMsg.setText("Acceso como invitado - Modo offline activado");
+        
+        // Abrir ventana principal después de un breve delay
+        SwingUtilities.invokeLater(() -> {
+            try {
+                Thread.sleep(1000); // Pequeño delay para mostrar el mensaje
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            new macropriaxis.IndexGigas().setVisible(true);
+            this.dispose();
+        });
     }
 } 

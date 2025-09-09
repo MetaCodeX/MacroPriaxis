@@ -11,7 +11,7 @@ public class Practica17_DespliegueImagen6 {
     
     public static void ejecutar() {
         Stage stage = new Stage();
-        stage.setTitle("Práctica 17 - Despliegue de imagen 6");
+        stage.setTitle("Práctica 17 - Despliegue de imagen 6 - Carlos Eduardo Juarez Ricardo - 09/09/2025");
 
         try {
             Image image;
