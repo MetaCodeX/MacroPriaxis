@@ -88,7 +88,7 @@ public class MultimediaMenu extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Prácticas de JavaFX (1-9 y 11-20)");
+        jLabel2.setText("Prácticas de JavaFX (1-9, 11-20, 21-29)");
 
         jButton1.setText("Práctica 11 - Despliegue de Etiqueta");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -157,6 +157,78 @@ public class MultimediaMenu extends javax.swing.JFrame {
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
+            }
+        });
+
+        jButton21 = new javax.swing.JButton();
+        jButton21.setText("Práctica 21 - Eventos en Imágenes");
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
+
+        jButton22 = new javax.swing.JButton();
+        jButton22.setText("Práctica 22 - Eventos en Botones");
+        jButton22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton22ActionPerformed(evt);
+            }
+        });
+
+        jButton23 = new javax.swing.JButton();
+        jButton23.setText("Práctica 23 - Desplegar un Botón");
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
+
+        jButton24 = new javax.swing.JButton();
+        jButton24.setText("Práctica 24 - Botón con Estado");
+        jButton24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton24ActionPerformed(evt);
+            }
+        });
+
+        jButton25 = new javax.swing.JButton();
+        jButton25.setText("Práctica 25 - Botón con Imágenes");
+        jButton25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton25ActionPerformed(evt);
+            }
+        });
+
+        jButton26 = new javax.swing.JButton();
+        jButton26.setText("Práctica 26 - Capturar Texto");
+        jButton26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton26ActionPerformed(evt);
+            }
+        });
+
+        jButton27 = new javax.swing.JButton();
+        jButton27.setText("Práctica 27 - RadioButtons");
+        jButton27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton27ActionPerformed(evt);
+            }
+        });
+
+        jButton28 = new javax.swing.JButton();
+        jButton28.setText("Práctica 28 - RadioButtons con Botón");
+        jButton28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton28ActionPerformed(evt);
+            }
+        });
+
+        jButton29 = new javax.swing.JButton();
+        jButton29.setText("Práctica 29 - RadioButtons con Imágenes");
+        jButton29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton29ActionPerformed(evt);
             }
         });
 
@@ -261,23 +333,32 @@ public class MultimediaMenu extends javax.swing.JFrame {
                             .addComponent(jButtonP4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonP5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonP6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonP7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButtonP7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonP8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonP9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonP8, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                            .addComponent(jButtonP9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton22, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(jButton23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(200, 200, 200)
                         .addComponent(jLabel1))
@@ -303,36 +384,51 @@ public class MultimediaMenu extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonP1)
-                    .addComponent(jButtonP8)
-                    .addComponent(jButton6))
+                    .addComponent(jButton2)
+                    .addComponent(jButton22))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonP2)
-                    .addComponent(jButtonP9)
-                    .addComponent(jButton7))
+                    .addComponent(jButton3)
+                    .addComponent(jButton23))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonP3)
-                    .addComponent(jButton1)
-                    .addComponent(jButton8))
+                    .addComponent(jButton4)
+                    .addComponent(jButton24))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonP4)
-                    .addComponent(jButton2)
-                    .addComponent(jButton9))
+                    .addComponent(jButton5)
+                    .addComponent(jButton25))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonP5)
-                    .addComponent(jButton3)
-                    .addComponent(jButton10))
+                    .addComponent(jButton6)
+                    .addComponent(jButton26))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonP6)
-                    .addComponent(jButton4))
+                    .addComponent(jButton7)
+                    .addComponent(jButton27))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonP7)
-                    .addComponent(jButton5))
+                    .addComponent(jButton8)
+                    .addComponent(jButton28))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonP8)
+                    .addComponent(jButton9)
+                    .addComponent(jButton29))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonP9)
+                    .addComponent(jButton10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton21))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonVolver)
@@ -853,6 +949,213 @@ public class MultimediaMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonP9ActionPerformed
 
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        // Práctica 21 - Eventos en Imágenes
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica21_EventosEnImagenes.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 21: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 21: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButton21ActionPerformed
+
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+        // Práctica 22 - Eventos en Botones
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica22_EventosEnBotones.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 22: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 22: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButton22ActionPerformed
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        // Práctica 23 - Desplegar un Botón
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica23_DesplegarUnBoton.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 23: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 23: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+        // Práctica 24 - Botón con Estado
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica24_DesplegarUnBotonConEstado.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 24: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 24: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButton24ActionPerformed
+
+    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+        // Práctica 25 - Botón con Imágenes
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica25_BotonConImagenes.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 25: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 25: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButton25ActionPerformed
+
+    private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
+        // Práctica 26 - Capturar Texto
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica26_CapturarTexto.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 26: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 26: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButton26ActionPerformed
+
+    private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
+        // Práctica 27 - RadioButtons
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica27_CapturarOpcionesRadioButtons.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 27: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 27: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButton27ActionPerformed
+
+    private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
+        // Práctica 28 - RadioButtons con Botón
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica28_CapturarOpcionesRadioButtonsConBoton.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 28: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 28: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButton28ActionPerformed
+
+    private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
+        // Práctica 29 - RadioButtons con Imágenes
+        try {
+            if (!JavaFXManager.isAvailable()) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "JavaFX no está disponible. Use el botón 'Limpiar Sistema' para reiniciar.", 
+                    "JavaFX no disponible", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JavaFXManager.executePractice(() -> {
+                macropriaxis.multimedia.practicas.Practica29_RadioButtonsConImagenesYBoton.ejecutar();
+            });
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al ejecutar Práctica 29: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error en Práctica 29: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButton29ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -892,6 +1195,15 @@ public class MultimediaMenu extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton21;
+    private javax.swing.JButton jButton22;
+    private javax.swing.JButton jButton23;
+    private javax.swing.JButton jButton24;
+    private javax.swing.JButton jButton25;
+    private javax.swing.JButton jButton26;
+    private javax.swing.JButton jButton27;
+    private javax.swing.JButton jButton28;
+    private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
